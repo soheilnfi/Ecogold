@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { FreshnessSeal } from "@/components/data/FreshnessSeal";
 import { useCoverageData } from "@/lib/hooks/useCoverageData";
-import { getCoverageDisclosurePolicy } from "@/lib/coverage-disclosure";
+import type { CoverageDisclosurePolicy } from "@/lib/coverage-disclosure";
 import { formatFileSize, formatPercent } from "@/lib/format";
 import { formatJalaliDate, jalaliReportSuffix } from "@/lib/jalali";
 
@@ -34,11 +34,7 @@ function deriveSize(date: string): number {
   return 170_000 + (hash % 40) * 1024;
 }
 
-export function CoverageReport({
-  policy = getCoverageDisclosurePolicy(),
-}: {
-  policy?: ReturnType<typeof getCoverageDisclosurePolicy>;
-}) {
+export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy }) {
   const { data, status, ratio, display, loading } = useCoverageData(policy);
   const [archiveOpen, setArchiveOpen] = useState(false);
   const [page, setPage] = useState(0);
@@ -58,6 +54,8 @@ export function CoverageReport({
 
   const unavailable = status === "unavailable";
   const canDownload = !unavailable && !!data?.todayReport;
+  // اگر سیاست افشا عدد را پنهان کرده، نمودار/آرشیو هم نباید عدد دقیق را از راه دیگری لو بدهند
+  const numericHidden = unavailable || display.kind !== "number";
 
   return (
     <section id="coverage" className="scroll-mt-20 bg-vault-900 text-vault-ink">
@@ -106,7 +104,12 @@ export function CoverageReport({
                 >
                   {copy.coverageReport.downloadToday}
                 </Button>
-                <Button variant="ghost" size="md" onClick={() => setArchiveOpen(true)} className="!border-vault-line !text-vault-ink hover:!border-gold">
+                <Button
+                  variant="ghost"
+                  size="md"
+                  onClick={() => !numericHidden && setArchiveOpen(true)}
+                  className={`!border-vault-line !text-vault-ink hover:!border-gold ${numericHidden ? "pointer-events-none opacity-40" : ""}`}
+                >
                   {copy.coverageReport.viewArchive}
                 </Button>
               </div>
@@ -127,7 +130,13 @@ export function CoverageReport({
               <p className="mb-1 text-sm font-bold text-vault-ink">{copy.coverageReport.chartTitle}</p>
               <p className="mb-4 text-xs text-vault-muted">{copy.coverageReport.chartRangeNote}</p>
               <div className="h-56 w-full">
-                {chartData.length > 0 ? (
+                {numericHidden ? (
+                  <div className="flex h-full items-center justify-center text-center text-sm text-vault-muted">
+                    {display.kind === "threshold-message"
+                      ? copy.coverageReport.disclosurePolicy.thresholdMessage
+                      : copy.coverageReport.states.unavailable}
+                  </div>
+                ) : chartData.length > 0 ? (
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={chartData} margin={{ top: 8, right: 8, left: -20, bottom: 0 }}>
                       <CartesianGrid stroke="var(--vault-line)" vertical={false} />

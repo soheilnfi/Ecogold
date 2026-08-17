@@ -1,12 +1,10 @@
 import { copy } from "@/content/copy.fa";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { getCoverageDisclosurePolicy } from "@/lib/coverage-disclosure";
+import type { CoverageDisclosurePolicy } from "@/lib/coverage-disclosure";
 import { HeroCoverageScale } from "./HeroCoverageScale";
 
-export function Hero() {
-  const policy = getCoverageDisclosurePolicy();
-
+export function Hero({ policy }: { policy: CoverageDisclosurePolicy }) {
   return (
     <section id="hero" className="scroll-mt-20 border-b border-line">
       <div className="mx-auto grid max-w-[1160px] grid-cols-1 items-center gap-12 px-5 py-16 sm:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">

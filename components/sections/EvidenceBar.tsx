@@ -1,32 +1,34 @@
 "use client";
 
 import { copy } from "@/content/copy.fa";
+import { useCoverageData } from "@/lib/hooks/useCoverageData";
 import { useLiveData } from "@/lib/hooks/useLiveData";
 import { resolveFreshness } from "@/lib/freshness";
 import { formatPercent, toPersianDigits } from "@/lib/format";
 import { Reveal } from "@/components/ui/Reveal";
-import type { CoverageResponse } from "@/lib/mock/coverage";
+import type { CoverageDisclosurePolicy } from "@/lib/coverage-disclosure";
 import type { StatusResponse } from "@/lib/mock/status";
 
-function useEvidenceValues() {
-  const coverage = useLiveData<CoverageResponse>("/api/coverage", { intervalMs: 5 * 60_000 });
+function useEvidenceValues(policy: CoverageDisclosurePolicy) {
+  const coverage = useCoverageData(policy);
   const status = useLiveData<StatusResponse>("/api/status", { intervalMs: 60_000 });
 
-  const coverageStatus = resolveFreshness({
-    serverStatus: coverage.fetchFailed ? "unavailable" : coverage.data?.status,
-    asOf: coverage.data?.asOf ?? null,
-    kind: "coverage",
-  });
   const statusStatus = resolveFreshness({
     serverStatus: status.fetchFailed ? "unavailable" : status.data?.status,
     asOf: status.data?.asOf ?? null,
     kind: "status",
   });
 
+  // همان قاعدهٔ سیاست افشا که در هیرو/گزارش پوشش رعایت می‌شود — اینجا هم باید
+  // بدون نشتی رعایت شود، وگرنه نوار شواهد از راه دیگری عدد پنهان‌شده را لو می‌دهد
   const coverageText =
-    coverageStatus !== "unavailable" && coverage.data?.ratio != null
-      ? formatPercent(coverage.data.ratio)
-      : "—";
+    coverage.display.kind === "number" && coverage.ratio !== null
+      ? formatPercent(coverage.ratio)
+      : coverage.display.kind === "qualitative"
+        ? coverage.display.ok
+          ? copy.coverageReport.disclosurePolicy.hiddenOk
+          : copy.coverageReport.disclosurePolicy.hiddenReviewing
+        : "—";
 
   const total = status.data?.services.length ?? 8;
   const operational = status.data?.services.filter((s) => s.state === "operational").length ?? 0;
@@ -36,8 +38,8 @@ function useEvidenceValues() {
   return { coverageText, uptimeText };
 }
 
-export function EvidenceBar() {
-  const { coverageText, uptimeText } = useEvidenceValues();
+export function EvidenceBar({ policy }: { policy: CoverageDisclosurePolicy }) {
+  const { coverageText, uptimeText } = useEvidenceValues(policy);
   const values: Record<string, string> = {
     coverageRatio: coverageText,
     serviceUptime: uptimeText,
