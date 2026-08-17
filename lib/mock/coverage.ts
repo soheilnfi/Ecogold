@@ -18,12 +18,13 @@ export interface CoverageResponse {
 
 const DAY_MS = 24 * 60 * 60_000;
 
+/** ۹۰ نقطه برمی‌گرداند: ۳۰ روز آخر برای نمودار، کل ۹۰ روز برای جدول آرشیو */
 function buildHistory(now: number, latestRatio: number): CoverageHistoryPoint[] {
   const rand = seededRandom("coverage-history-v1");
   const points: CoverageHistoryPoint[] = [];
   let ratio = latestRatio;
 
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 90; i++) {
     const date = new Date(now - i * DAY_MS).toISOString().slice(0, 10);
     points.unshift({ date, ratio: Math.round(ratio * 10) / 10 });
     ratio += (rand() - 0.5) * 1.4;

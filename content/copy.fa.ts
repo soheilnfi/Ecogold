@@ -215,6 +215,8 @@ export const copy = {
         question: "آیا امکان دریافت فیزیکی طلا وجود دارد؟",
         answer:
           "بله؛ از حداقل ۰٫۵ گرم، با فلوی ۴مرحله‌ای ثبت درخواست تا تحویل با احراز مالکیت. جزئیات در سکشن «دریافت فیزیکی».",
+        linkHref: undefined as string | undefined,
+        linkLabel: undefined as string | undefined,
       },
       {
         id: "security-1",
@@ -222,6 +224,8 @@ export const copy = {
         question: "آیا امکان دسترسی غیرمجاز به حساب من وجود دارد؟",
         answer:
           "کانال‌های ارتباطی رسمی اکوگلد محدود و مشخص‌اند. اکوگلد و بنیان‌گذار هرگز در پیام خصوصی درخواست انتقال وجه، رمز یا کد تأیید نمی‌کنند.",
+        linkHref: undefined as string | undefined,
+        linkLabel: undefined as string | undefined,
       },
       {
         id: "withdrawal-1",
