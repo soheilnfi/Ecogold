@@ -11,10 +11,15 @@ import { UptimeStrip } from "@/components/data/UptimeStrip";
 import { cn } from "@/lib/cn";
 import type { StatusResponse, ServiceState } from "@/lib/mock/status";
 
-const STATE_STYLE: Record<ServiceState, { dot: string; shape: string }> = {
-  operational: { dot: "bg-ok", shape: "●" },
-  degraded: { dot: "bg-warn", shape: "▲" },
-  down: { dot: "bg-down", shape: "■" },
+/**
+ * شکل هر وضعیت با CSS ساخته می‌شود، نه با گلیف یونیکد (●▲■) — چون رندر آن
+ * گلیف‌ها به فونت جاری/فالبک بستگی دارد و اندازه/خط پایه‌شان می‌تواند به‌شکل
+ * غیرقابل‌پیش‌بینی از قاب کوچک خودش بیرون بزند.
+ */
+const STATE_STYLE: Record<ServiceState, string> = {
+  operational: "size-2 rounded-full bg-ok",
+  degraded: "size-0 border-x-[5px] border-b-[8px] border-x-transparent border-b-warn",
+  down: "size-2 rounded-[1px] bg-down",
 };
 
 export function ServiceStatus() {
@@ -68,9 +73,7 @@ export function ServiceStatus() {
                               : "text-down"
                         )}
                       >
-                        <span aria-hidden="true" className={cn("text-[8px]", style.dot, "rounded-full")}>
-                          {style.shape}
-                        </span>
+                        <span aria-hidden="true" className={cn("inline-block shrink-0", style)} />
                         {copy.serviceStatus.stateLabels[service.state]}
                       </span>
                     </div>
@@ -89,16 +92,11 @@ export function ServiceStatus() {
           </div>
         )}
 
-        <div className="mt-6 flex flex-wrap items-center gap-3 text-xs text-muted">
-          {!unavailable && data && (
-            <span>
-              {copy.serviceStatus.lastCheckedPrefix} {formatRelativeFromNow(data.asOf!)}
-            </span>
-          )}
-          <a href="#incidents" className="font-bold text-ink-700 underline underline-offset-2 hover:text-ink-900">
-            {copy.serviceStatus.incidentsLink}
-          </a>
-        </div>
+        {!unavailable && data && (
+          <p className="mt-6 text-xs text-muted">
+            {copy.serviceStatus.lastCheckedPrefix} {formatRelativeFromNow(data.asOf!)}
+          </p>
+        )}
       </div>
     </section>
   );

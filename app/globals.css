@@ -117,7 +117,6 @@ body {
   color: var(--ink-900);
   font-family: var(--font-sans);
   font-variation-settings: "dots" 2;
-  font-feature-settings: "ss02" 1;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -126,16 +125,19 @@ body {
   font-feature-settings: "tnum" 1, "dots" 2;
 }
 
+/* فقط برای رشته‌های خالص لاتین/رقمی (شناسه، هش، شماره‌تلفن با dir=ltr) — هرگز
+   روی متنی که کلمهٔ فارسی دارد، چون IBM Plex Mono چسبیدگی حروف فارسی را ندارد */
 .font-mono-id {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.01em;
 }
 
+/* letter-spacing عمداً صفر است: فاصلهٔ بین حروف در رسم‌الخط فارسی/عربی باعث
+   می‌شود حروف به‌هم‌چسبیده (joined) به‌صورت جدا از هم رندر شوند */
 .eyebrow {
   font-size: var(--text-eyebrow);
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0;
   color: var(--muted);
 }
 

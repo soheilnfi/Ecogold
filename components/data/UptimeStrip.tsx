@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { formatJalaliDate } from "@/lib/jalali";
-import { formatPercent } from "@/lib/format";
+import { formatPercent, toPersianDigits } from "@/lib/format";
 import { cn } from "@/lib/cn";
 import type { ServiceDay } from "@/lib/mock/status";
 
@@ -42,10 +42,11 @@ export function UptimeStrip({ days, className }: { days: ServiceDay[]; className
       {active && (
         <div
           role="tooltip"
-          className="absolute bottom-8 right-0 z-10 whitespace-nowrap rounded-md bg-ink-900 px-3 py-1.5 font-mono-id text-xs text-white shadow-lg"
+          className="absolute bottom-8 right-0 z-10 whitespace-nowrap rounded-md bg-ink-900 px-3 py-1.5 tabular-nums text-xs text-white shadow-lg"
         >
           {formatJalaliDate(active.date)} · {formatPercent(active.uptime)}
-          {active.incidentMinutes > 0 && ` · ${active.incidentMinutes} دقیقه اختلال`}
+          {active.incidentMinutes > 0 &&
+            ` · ${toPersianDigits(active.incidentMinutes)} دقیقه اختلال`}
         </div>
       )}
     </div>

@@ -52,7 +52,7 @@ export function Licenses() {
                   </div>
                   <p className="mt-4 text-sm font-bold text-ink-900">{item.title}</p>
                   <p className="mt-1 text-xs text-muted">{item.issuer}</p>
-                  <div className="mt-4 flex-1 space-y-1 font-mono-id text-xs text-muted">
+                  <div className="mt-4 flex-1 space-y-1 tabular-nums text-xs text-muted">
                     <p>
                       {copy.licenses.numberLabel}: {item.number}
                     </p>

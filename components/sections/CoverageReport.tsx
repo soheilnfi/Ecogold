@@ -176,7 +176,7 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
             <tbody className="divide-y divide-line">
               {pageRows.map((row) => (
                 <tr key={row.date}>
-                  <td className="py-2 font-mono-id">{formatJalaliDate(row.date)}</td>
+                  <td className="py-2 tabular-nums">{formatJalaliDate(row.date)}</td>
                   <td className="py-2 tabular-nums">{formatPercent(row.ratio)}</td>
                   <td className="py-2 font-mono-id">{deriveReportId(row.date)}</td>
                   <td className="py-2 tabular-nums text-muted">{formatFileSize(deriveSize(row.date))}</td>

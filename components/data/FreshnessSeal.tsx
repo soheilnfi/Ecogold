@@ -43,7 +43,7 @@ export function FreshnessSeal({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 font-mono-id text-xs",
+        "inline-flex items-center gap-2 tabular-nums text-xs",
         onVault ? "text-vault-muted" : "text-muted",
         className
       )}

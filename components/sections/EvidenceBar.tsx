@@ -56,7 +56,7 @@ export function EvidenceBar({ policy }: { policy: CoverageDisclosurePolicy }) {
               href={item.anchor}
               className="block px-5 py-8 text-center transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:text-right"
             >
-              <p className="text-metric font-black tabular-nums text-ink-900">
+              <p className="text-h2 font-black tabular-nums text-ink-900 whitespace-nowrap">
                 {values[item.metric]}
               </p>
               <p className="mt-2 text-sm font-bold text-ink-900">{item.label}</p>
