@@ -1,16 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  ReferenceLine,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import dynamic from "next/dynamic";
 import { copy } from "@/content/copy.fa";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
@@ -21,6 +12,10 @@ import { useCoverageData } from "@/lib/hooks/useCoverageData";
 import type { CoverageDisclosurePolicy } from "@/lib/coverage-disclosure";
 import { formatFileSize, formatPercent } from "@/lib/format";
 import { formatJalaliDate, jalaliReportSuffix } from "@/lib/jalali";
+
+const CoverageChart = dynamic(() => import("./CoverageChart"), {
+  loading: () => <div className="h-full w-full animate-pulse rounded-md bg-vault-700" />,
+});
 
 const PAGE_SIZE = copy.coverageReport.archive.pageSize;
 
@@ -137,47 +132,11 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
                       : copy.coverageReport.states.unavailable}
                   </div>
                 ) : chartData.length > 0 ? (
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={chartData} margin={{ top: 8, right: 8, left: -20, bottom: 0 }}>
-                      <CartesianGrid stroke="var(--vault-line)" vertical={false} />
-                      <XAxis dataKey="dateLabel" hide />
-                      <YAxis
-                        domain={[98, 106]}
-                        tick={{ fill: "var(--vault-muted)", fontSize: 11 }}
-                        tickFormatter={(v) => `${v}٪`}
-                        width={40}
-                      />
-                      <ReferenceLine
-                        y={100}
-                        stroke="var(--gold-dim)"
-                        strokeDasharray="4 4"
-                        label={{
-                          value: copy.coverageReport.baselineLabel,
-                          position: "insideTopLeft",
-                          fill: "var(--gold-dim)",
-                          fontSize: 11,
-                        }}
-                      />
-                      <Tooltip
-                        contentStyle={{
-                          background: "var(--vault-700)",
-                          border: "1px solid var(--vault-line)",
-                          borderRadius: 8,
-                          fontSize: 12,
-                        }}
-                        labelStyle={{ color: "var(--vault-muted)" }}
-                        formatter={(value) => [formatPercent(Number(value)), copy.coverageReport.ratioCaption]}
-                        labelFormatter={(label) => label}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="ratio"
-                        stroke="var(--gold)"
-                        strokeWidth={2}
-                        dot={false}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
+                  <CoverageChart
+                    chartData={chartData}
+                    baselineLabel={copy.coverageReport.baselineLabel}
+                    ratioCaption={copy.coverageReport.ratioCaption}
+                  />
                 ) : (
                   <div className="flex h-full items-center justify-center text-sm text-vault-muted">
                     {copy.coverageReport.states.unavailable}
