@@ -1,0 +1,76 @@
+import { describe, expect, it } from "vitest";
+import {
+  formatCount,
+  formatFileSize,
+  formatGrams,
+  formatNumber,
+  formatPercent,
+  formatToman,
+  toPersianDigits,
+} from "./format";
+
+describe("toPersianDigits", () => {
+  it("converts latin digits to persian digits", () => {
+    expect(toPersianDigits("2026")).toBe("۲۰۲۶");
+  });
+
+  it("leaves non-digit characters untouched", () => {
+    expect(toPersianDigits("CVG-14050324")).toBe("CVG-۱۴۰۵۰۳۲۴");
+  });
+});
+
+describe("formatNumber", () => {
+  it("adds persian thousand separators", () => {
+    expect(formatNumber(8432000)).toBe("۸٬۴۳۲٬۰۰۰");
+  });
+
+  it("rounds fractional values", () => {
+    expect(formatNumber(1234.6)).toBe("۱٬۲۳۵");
+  });
+});
+
+describe("formatToman", () => {
+  it("appends تومان", () => {
+    expect(formatToman(10000)).toBe("۱۰٬۰۰۰ تومان");
+  });
+});
+
+describe("formatGrams", () => {
+  it("formats integers without decimals", () => {
+    expect(formatGrams(1)).toBe("۱ گرم");
+  });
+
+  it("formats fractional grams", () => {
+    expect(formatGrams(0.5)).toBe("۰٫۵۰ گرم");
+  });
+});
+
+describe("formatPercent", () => {
+  it("formats with one decimal by default", () => {
+    expect(formatPercent(102.4)).toBe("۱۰۲٫۴٪");
+  });
+
+  it("formats below-threshold values", () => {
+    expect(formatPercent(98.2)).toBe("۹۸٫۲٪");
+  });
+});
+
+describe("formatFileSize", () => {
+  it("formats bytes", () => {
+    expect(formatFileSize(500)).toBe("۵۰۰ بایت");
+  });
+
+  it("formats kilobytes", () => {
+    expect(formatFileSize(184320)).toBe("۱۸۰ کیلوبایت");
+  });
+
+  it("formats megabytes", () => {
+    expect(formatFileSize(2 * 1024 * 1024)).toBe("۲٫۰ مگابایت");
+  });
+});
+
+describe("formatCount", () => {
+  it("formats plain counts with persian digits", () => {
+    expect(formatCount(1284)).toBe("۱٬۲۸۴");
+  });
+});

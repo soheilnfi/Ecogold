@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+/*
+  توکن‌های دیزاین‌سیستم «مرکز اعتماد و شفافیت اکوگلد».
+  رنگ‌ها از ecogold.ir گرفته شده‌اند (زمینهٔ خنثی fafafa، طلایی CTA ffc669،
+  خزانهٔ تیره برای سکشن‌های پوشش/نگهداری)، مقیاس تایپ و ریتم whitespace از
+  dasstudio.framer.website الهام گرفته شده (eyebrow label، عدد بزرگ، فاصلهٔ زیاد).
+  رنگ‌های سیگنال (ok/warn/down/info) عمداً از طلایی برند مجزا نگه داشته شده‌اند
+  تا هرگز با «وضعیت واقعی داده» اشتباه گرفته نشوند.
+*/
+:root {
+  /* خنثی */
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --surface-2: #f5f5f5;
+  --line: #e5e5e5;
+
+  /* جوهر متن */
+  --ink-900: #101010;
+  --ink-700: #262626;
+  --ink-500: #4b4b4b;
+  --muted: #7a7a7a;
+
+  /* خزانه — سکشن‌های تیرهٔ پوشش دارایی/محل نگهداری */
+  --vault-900: #0b1512;
+  --vault-700: #16211d;
+  --vault-line: rgba(255, 255, 255, 0.12);
+  --vault-ink: #f3f5f4;
+  --vault-muted: #a7b3ae;
+
+  /* طلایی برند — فقط CTA، تاکید، عدد امضا. هرگز برای وضعیت سیستم استفاده نشود */
+  --gold: #ffc669;
+  --gold-dim: #c99a3e;
+  --ink-on-gold: #17130a;
+
+  /* سیگنال — مستقل از طلایی برند */
+  --ok: #16a34a;
+  --ok-bg: #d1fae5;
+  --warn: #ea580c;
+  --warn-bg: #ffedd5;
+  --down: #dc2626;
+  --down-bg: #fee2e2;
+  --info: #3b82f6;
+  --info-bg: #dbeafe;
+  --unavailable: #9ca3af;
+  --unavailable-bg: #f3f4f6;
+
+  /* شعاع/فاصله */
+  --radius-card: 14px;
+  --radius-pill: 999px;
+  --gutter: 24px;
+  --content-max: 1160px;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+
+  --color-ink-900: var(--ink-900);
+  --color-ink-700: var(--ink-700);
+  --color-ink-500: var(--ink-500);
+  --color-muted: var(--muted);
+
+  --color-vault-900: var(--vault-900);
+  --color-vault-700: var(--vault-700);
+  --color-vault-line: var(--vault-line);
+  --color-vault-ink: var(--vault-ink);
+  --color-vault-muted: var(--vault-muted);
+
+  --color-gold: var(--gold);
+  --color-gold-dim: var(--gold-dim);
+  --color-ink-on-gold: var(--ink-on-gold);
+
+  --color-ok: var(--ok);
+  --color-ok-bg: var(--ok-bg);
+  --color-warn: var(--warn);
+  --color-warn-bg: var(--warn-bg);
+  --color-down: var(--down);
+  --color-down-bg: var(--down-bg);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+  --color-unavailable: var(--unavailable);
+  --color-unavailable-bg: var(--unavailable-bg);
+
+  --radius-card: var(--radius-card);
+  --radius-pill: var(--radius-pill);
+
+  --font-sans: var(--font-iranyekan), "IRANYekanX Fallback", Tahoma, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --text-eyebrow: 0.8125rem;
+  --text-caption: clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);
+  --text-body: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem);
+  --text-h3: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --text-h2: clamp(1.375rem, 1.2rem + 1vw, 2rem);
+  --text-display-l: clamp(1.75rem, 1.3rem + 2.2vw, 2.75rem);
+  --text-display-xl: clamp(2.25rem, 1.4rem + 4.2vw, 4.5rem);
+  --text-metric: clamp(2.5rem, 1.6rem + 4.5vw, 4.5rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  /* محصول فعلاً فقط تم روشن دارد؛ خزانه خودش تیره است و کافی است */
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink-900);
+  font-family: var(--font-sans);
+  font-variation-settings: "dots" 2;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "dots" 2;
+}
+
+/* فقط برای رشته‌های خالص لاتین/رقمی (شناسه، هش، شماره‌تلفن با dir=ltr) — هرگز
+   روی متنی که کلمهٔ فارسی دارد، چون IBM Plex Mono چسبیدگی حروف فارسی را ندارد */
+.font-mono-id {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* letter-spacing عمداً صفر است: فاصلهٔ بین حروف در رسم‌الخط فارسی/عربی باعث
+   می‌شود حروف به‌هم‌چسبیده (joined) به‌صورت جدا از هم رندر شوند */
+.eyebrow {
+  font-size: var(--text-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+.eyebrow-on-vault {
+  color: var(--vault-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
