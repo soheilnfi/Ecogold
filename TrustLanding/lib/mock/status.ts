@@ -13,7 +13,7 @@ export interface ServiceEntry {
   key: string;
   label: string;
   state: ServiceState;
-  uptime90d: number;
+  uptime30d: number;
   days: ServiceDay[];
 }
 
@@ -45,7 +45,7 @@ function buildDays(now: number, key: string, forcedState: ServiceState): Service
   const rand = seededRandom(`status-${key}-v1`);
   const days: ServiceDay[] = [];
 
-  for (let i = 89; i >= 0; i--) {
+  for (let i = 29; i >= 0; i--) {
     const date = new Date(now - i * DAY_MS).toISOString().slice(0, 10);
     const isToday = i === 0;
     let incidentMinutes = 0;
@@ -88,7 +88,7 @@ export function buildStatusResponse(scenario: MockScenario, now: number): Status
       key,
       label,
       state: forcedState,
-      uptime90d: average(days.map((d) => d.uptime)),
+      uptime30d: average(days.map((d) => d.uptime)),
       days,
     };
   });

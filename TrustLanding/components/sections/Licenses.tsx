@@ -7,6 +7,7 @@ import { formatJalaliDate } from "@/lib/jalali";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Card } from "@/components/ui/Card";
+import { ExternalLinkArrow } from "@/components/ui/ExternalLinkArrow";
 import type { LicensesResponse } from "@/lib/mock/licenses";
 
 export function Licenses() {
@@ -64,9 +65,10 @@ export function Licenses() {
                     href={item.verifyUrl}
                     target="_blank"
                     rel="noopener"
-                    className="mt-4 text-xs font-bold text-info hover:underline"
+                    className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-info hover:underline"
                   >
-                    {copy.licenses.verifyLink} ↗
+                    {copy.licenses.verifyLink}
+                    <ExternalLinkArrow className="size-2.5" />
                   </a>
                 </Card>
               </Reveal>

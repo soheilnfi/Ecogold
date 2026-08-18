@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { formatPercent } from "@/lib/format";
 import type { FreshnessStatus } from "@/lib/freshness";
@@ -7,8 +8,14 @@ import type { CoverageDisplayMode } from "@/lib/coverage-disclosure";
 import { copy } from "@/content/copy.fa";
 import { FreshnessSeal } from "./FreshnessSeal";
 
+/**
+ * کفهٔ چپ (موجودی فیزیکی) در SVG سمت x کوچک‌تر است؛ چرخش مثبت (کلاک‌وایز)
+ * سمت راست (تعهد به کاربران) را پایین می‌برد. پس وقتی ratio>100 (موجودی
+ * سنگین‌تر از تعهد است) باید زاویه منفی باشد تا کفهٔ چپ/موجودی پایین بیفتد —
+ * موجودی فیزیکی همیشه باید از تعهد به کاربران سنگین‌تر (پایین‌تر) دیده شود.
+ */
 function clampAngle(ratio: number): number {
-  return Math.min(6, Math.max(-6, (ratio - 100) * 1.2));
+  return Math.min(6, Math.max(-6, -(ratio - 100) * 1.2));
 }
 
 /** المان امضا — ترازوی زندهٔ پوشش دارایی */
@@ -29,6 +36,13 @@ export function CoverageScale({
   const angle = ratio !== null ? clampAngle(ratio) : 0;
   const showBeam = status !== "unavailable" && !loading;
   const t = copy.hero.scale;
+
+  // فاز ۱: نشست فنری با کمی سرریز (جذاب‌تر از یک چرخش صاف)
+  // فاز ۲: بعد از نشستن، یک تاب خیلی ملایم و پیوسته — تا ترازو «زنده» بماند
+  const [settled, setSettled] = useState(false);
+  useEffect(() => {
+    setSettled(false);
+  }, [angle, showBeam]);
 
   return (
     <div className="flex flex-col items-center gap-5">
@@ -54,12 +68,23 @@ export function CoverageScale({
 
         <motion.g
           initial={false}
-          animate={{ rotate: showBeam ? angle : 0 }}
+          animate={{
+            rotate: !showBeam
+              ? 0
+              : settled
+                ? [angle - 0.6, angle + 0.6, angle - 0.6]
+                : [angle * 1.6, angle - 0.8, angle + 0.4, angle],
+          }}
           transition={
             reduce
               ? { duration: 0 }
-              : { type: "spring", stiffness: 90, damping: 12, duration: 0.9 }
+              : settled
+                ? { duration: 5, repeat: Infinity, ease: "easeInOut" }
+                : { duration: 1.3, times: [0, 0.55, 0.8, 1], ease: "easeOut" }
           }
+          onAnimationComplete={() => {
+            if (!reduce && showBeam) setSettled(true);
+          }}
           style={{ originX: "160px", originY: "58px" }}
         >
           {/* تیرک ترازو */}

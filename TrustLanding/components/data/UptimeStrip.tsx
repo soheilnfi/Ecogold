@@ -12,7 +12,7 @@ const BAR_TONE = (day: ServiceDay) => {
   return "bg-down";
 };
 
-/** نوار ۹۰ روزهٔ در دسترس‌بودن سرویس — الگوی صفحهٔ status صنعتی */
+/** نوار ۳۰ روزهٔ در دسترس‌بودن سرویس — الگوی صفحهٔ status صنعتی */
 export function UptimeStrip({ days, className }: { days: ServiceDay[]; className?: string }) {
   const [active, setActive] = useState<ServiceDay | null>(null);
 
@@ -22,7 +22,7 @@ export function UptimeStrip({ days, className }: { days: ServiceDay[]; className
         className="flex items-end gap-[2px]"
         onMouseLeave={() => setActive(null)}
         role="img"
-        aria-label={`روند ۹۰ روز گذشته، ${days.filter((d) => d.incidentMinutes > 0).length} روز با اختلال`}
+        aria-label={`روند ۳۰ روز گذشته، ${days.filter((d) => d.incidentMinutes > 0).length} روز با اختلال`}
       >
         {days.map((day) => (
           <button

@@ -124,7 +124,7 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
             <div>
               <p className="mb-1 text-sm font-bold text-vault-ink">{copy.coverageReport.chartTitle}</p>
               <p className="mb-4 text-xs text-vault-muted">{copy.coverageReport.chartRangeNote}</p>
-              <div className="h-56 w-full">
+              <div className="h-56 w-full" dir="ltr">
                 {numericHidden ? (
                   <div className="flex h-full items-center justify-center text-center text-sm text-vault-muted">
                     {display.kind === "threshold-message"

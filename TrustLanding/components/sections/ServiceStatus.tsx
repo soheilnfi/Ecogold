@@ -83,7 +83,7 @@ export function ServiceStatus() {
                     </div>
 
                     <p className="mt-3 text-xs text-muted">
-                      {formatPercent(service.uptime90d, 2)} در ۹۰ روز گذشته
+                      {formatPercent(service.uptime30d, 2)} در ۳۰ روز گذشته
                     </p>
                   </div>
                 </Reveal>
