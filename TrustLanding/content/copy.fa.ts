@@ -31,7 +31,7 @@ export const copy = {
       degraded: (n: number) => `${n} سرویس با اختلال`,
       unavailable: "وضعیت در دسترس نیست",
     },
-    ctaDownloadReport: "دانلود گزارش امروز",
+    ctaDownloadReport: "دانلود گزارش مهر ماه",
     ctaLogin: "ورود و ثبت‌نام",
   },
 
@@ -69,7 +69,7 @@ export const copy = {
     title: "اعتماد باید قابل دیدن باشد",
     subtitle:
       "هر گرم دارایی شما پشتوانهٔ فیزیکی دارد. عدد پوشش، محل نگهداری، ساختار قیمت و وضعیت لحظه‌ای سرویس‌ها — همه در یک صفحه، با زمان و منبع مشخص.",
-    ctaPrimary: "دانلود گزارش امروز",
+    ctaPrimary: "دانلود گزارش مهر ماه",
     ctaSecondary: "وضعیت سرویس‌ها را ببینید",
     tickers: ["طلا", "نقره", "فلزات گران‌بها"],
     scale: {
@@ -114,7 +114,7 @@ export const copy = {
     eyebrow: "قلب صفحه",
     title: "گزارش پوشش دارایی",
     ratioCaption: "نسبت پوشش دارایی",
-    downloadToday: "دانلود گزارش امروز (PDF)",
+    downloadToday: "دانلود گزارش مهر ماه (PDF)",
     viewArchive: "گزارش‌های قبلی",
     chartTitle: "روند ۳۰ روز اخیر",
     chartRangeNote: "محور عمودی برای دیده‌شدن نوسان واقعی به بازهٔ ۹۸ تا ۱۰۶ درصد محدود شده است.",
@@ -137,7 +137,7 @@ export const copy = {
     states: {
       unavailable: "نسبت پوشش در دسترس نیست — در حال بررسی",
       stale: "داده قدیمی",
-      downloadDisabled: "به‌دلیل قطع موقت اتصال به منبع، دانلود گزارش امروز فعلاً در دسترس نیست.",
+      downloadDisabled: "به‌دلیل قطع موقت اتصال به منبع، دانلود گزارش مهر ماه فعلاً در دسترس نیست.",
     },
     disclosurePolicy: {
       thresholdMessage:
@@ -241,8 +241,8 @@ export const copy = {
 
   finalCta: {
     title: "شفافیت را خودتان بررسی کنید.",
-    subtitle: "گزارش امروز را دانلود کنید یا مسیر برداشت را با ۱۰٬۰۰۰ تومان تست کنید.",
-    ctaPrimary: "دانلود گزارش امروز",
+    subtitle: "گزارش مهر ماه را دانلود کنید یا مسیر برداشت را با ۱۰٬۰۰۰ تومان تست کنید.",
+    ctaPrimary: "دانلود گزارش مهر ماه",
     ctaSecondary: "تست دریافت وجه",
   },
 } as const;
