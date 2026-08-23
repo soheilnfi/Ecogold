@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   formatCount,
+  formatDecimal,
   formatFileSize,
   formatGrams,
   formatNumber,
@@ -72,5 +73,11 @@ describe("formatFileSize", () => {
 describe("formatCount", () => {
   it("formats plain counts with persian digits", () => {
     expect(formatCount(1284)).toBe("۱٬۲۸۴");
+  });
+});
+
+describe("formatDecimal", () => {
+  it("formats a decimal with persian digits and separator, no unit", () => {
+    expect(formatDecimal(4.7)).toBe("۴٫۷");
   });
 });

@@ -6,7 +6,11 @@ import { ServiceStatus } from "@/components/sections/ServiceStatus";
 import { CoverageReport } from "@/components/sections/CoverageReport";
 import { Licenses } from "@/components/sections/Licenses";
 import { PriceTransparency } from "@/components/sections/PriceTransparency";
+import { Settlement } from "@/components/sections/Settlement";
+import { PhysicalDelivery } from "@/components/sections/PhysicalDelivery";
+import { DeliveryCenter } from "@/components/sections/DeliveryCenter";
 import { Faq } from "@/components/sections/Faq";
+import { Reviews } from "@/components/sections/Reviews";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { getCoverageDisclosurePolicy } from "@/lib/coverage-disclosure";
 
@@ -27,7 +31,11 @@ export default function Home() {
         <CoverageReport policy={coveragePolicy} />
         <Licenses />
         <PriceTransparency />
+        <Settlement />
+        <PhysicalDelivery />
+        <DeliveryCenter />
         <Faq />
+        <Reviews />
         <FinalCta />
       </main>
       <SiteFooter />

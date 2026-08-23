@@ -33,6 +33,11 @@ export function formatPercent(value: number, decimals = 1): string {
   return `${toPersianDecimal(value.toFixed(decimals))}٪`;
 }
 
+/** عدد اعشاری فارسی بدون واحد، مثل «۴٫۷» — برای امتیاز/میانگین */
+export function formatDecimal(value: number, decimals = 1): string {
+  return toPersianDecimal(value.toFixed(decimals));
+}
+
 export function formatFileSize(bytes: number): string {
   if (bytes < 1024) return `${toPersianDigits(bytes)} بایت`;
   const kb = bytes / 1024;

@@ -17,7 +17,7 @@ test.describe("سناریوی قطع منبع", () => {
     // سکشن گزارش پوشش: بدون عدد، دکمهٔ دانلود غیرفعال (نه لینک شکسته)
     const coverageSection = page.locator("#coverage");
     await expect(coverageSection.getByText("نسبت پوشش در دسترس نیست").first()).toBeVisible();
-    const downloadBtn = coverageSection.getByRole("link", { name: "دانلود گزارش امروز (PDF)" });
+    const downloadBtn = coverageSection.getByRole("link", { name: "دانلود گزارش مهر ماه (PDF)" });
     await expect(downloadBtn).toHaveClass(/pointer-events-none/);
 
     // قیمت: به‌جای عدد، «—»
