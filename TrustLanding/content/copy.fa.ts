@@ -132,7 +132,6 @@ export const copy = {
       title: "گزارش‌های قبلی",
       columns: { date: "تاریخ", size: "حجم فایل", download: "دانلود" },
       filterAllMonths: "همهٔ ماه‌ها",
-      pageSize: 20,
     },
     states: {
       unavailable: "نسبت پوشش در دسترس نیست — در حال بررسی",

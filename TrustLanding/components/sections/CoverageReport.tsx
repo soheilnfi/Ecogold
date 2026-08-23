@@ -17,8 +17,6 @@ const CoverageChart = dynamic(() => import("./CoverageChart"), {
   loading: () => <div className="h-full w-full animate-pulse rounded-md bg-vault-700" />,
 });
 
-const PAGE_SIZE = copy.coverageReport.archive.pageSize;
-
 function deriveReportId(date: string): string {
   return `CVG-${jalaliReportSuffix(date)}`;
 }
@@ -32,7 +30,6 @@ function deriveSize(date: string): number {
 export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy }) {
   const { data, status, ratio, display, loading } = useCoverageData(policy);
   const [archiveOpen, setArchiveOpen] = useState(false);
-  const [page, setPage] = useState(0);
 
   const chartData = useMemo(
     () => (data?.history ?? []).slice(-30).map((p) => ({ ...p, dateLabel: formatJalaliDate(p.date) })),
@@ -43,9 +40,6 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
     const all = data?.history ?? [];
     return [...all].reverse();
   }, [data]);
-
-  const pageRows = archiveRows.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
-  const pageCount = Math.max(1, Math.ceil(archiveRows.length / PAGE_SIZE));
 
   const unavailable = status === "unavailable";
   const canDownload = !unavailable && !!data?.todayReport;
@@ -164,7 +158,7 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
       <Modal open={archiveOpen} onClose={() => setArchiveOpen(false)} title={copy.coverageReport.archive.title}>
         <div className="overflow-x-auto">
           <table className="w-full text-right text-sm">
-            <thead>
+            <thead className="sticky top-0 bg-surface">
               <tr className="border-b border-line text-xs text-muted">
                 <th className="py-2 font-bold">{copy.coverageReport.archive.columns.date}</th>
                 <th className="py-2 font-bold">{copy.coverageReport.archive.columns.size}</th>
@@ -172,7 +166,7 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
               </tr>
             </thead>
             <tbody className="divide-y divide-line">
-              {pageRows.map((row) => (
+              {archiveRows.map((row) => (
                 <tr key={row.date}>
                   <td className="py-2 tabular-nums">{formatJalaliDate(row.date)}</td>
                   <td className="py-2 tabular-nums text-muted">{formatFileSize(deriveSize(row.date))}</td>
@@ -188,26 +182,6 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
               ))}
             </tbody>
           </table>
-        </div>
-
-        <div className="mt-4 flex items-center justify-between text-sm">
-          <button
-            disabled={page === 0}
-            onClick={() => setPage((p) => Math.max(0, p - 1))}
-            className="font-bold text-ink-700 disabled:opacity-30"
-          >
-            قبلی
-          </button>
-          <span className="text-xs text-muted tabular-nums">
-            صفحهٔ {page + 1} از {pageCount}
-          </span>
-          <button
-            disabled={page >= pageCount - 1}
-            onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))}
-            className="font-bold text-ink-700 disabled:opacity-30"
-          >
-            بعدی
-          </button>
         </div>
       </Modal>
     </section>
