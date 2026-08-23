@@ -57,7 +57,7 @@ export function DeliveryCenter() {
             <p className="mt-2 text-sm text-vault-muted">{b.hoursWeekdays}</p>
             <p className="text-sm text-vault-muted">{b.hoursThursday}</p>
             <p className="text-sm text-vault-muted">{b.closedFriday}</p>
-            <p className="mt-3 font-mono-id text-sm" dir="ltr">
+            <p className="mt-3 tabular-nums text-sm" dir="ltr">
               {b.phone}
             </p>
 

@@ -13,7 +13,7 @@ export function SectionNumber({
   return (
     <span
       className={cn(
-        "font-mono-id text-sm font-medium",
+        "tabular-nums text-sm font-medium",
         onVault ? "text-vault-muted" : "text-muted",
         className
       )}

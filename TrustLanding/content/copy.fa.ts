@@ -31,7 +31,7 @@ export const copy = {
       degraded: (n: number) => `${n} سرویس با اختلال`,
       unavailable: "وضعیت در دسترس نیست",
     },
-    ctaDownloadReport: "دانلود گزارش مهر ماه",
+    ctaDownloadReport: "دانلود گزارش",
     ctaLogin: "ورود و ثبت‌نام",
   },
 
@@ -69,7 +69,7 @@ export const copy = {
     title: "اعتماد باید قابل دیدن باشد",
     subtitle:
       "هر گرم دارایی شما پشتوانهٔ فیزیکی دارد. عدد پوشش، محل نگهداری، ساختار قیمت و وضعیت لحظه‌ای سرویس‌ها — همه در یک صفحه، با زمان و منبع مشخص.",
-    ctaPrimary: "دانلود گزارش مهر ماه",
+    ctaPrimary: "دانلود گزارش",
     ctaSecondary: "وضعیت سرویس‌ها را ببینید",
     tickers: ["طلا", "نقره", "فلزات گران‌بها"],
     scale: {
@@ -114,12 +114,12 @@ export const copy = {
     eyebrow: "قلب صفحه",
     title: "گزارش پوشش دارایی",
     ratioCaption: "نسبت پوشش دارایی",
-    downloadToday: "دانلود گزارش مهر ماه (PDF)",
+    downloadToday: "دانلود گزارش (PDF)",
     viewArchive: "گزارش‌های قبلی",
     chartTitle: "روند ۳۰ روز اخیر",
     chartRangeNote: "محور عمودی برای دیده‌شدن نوسان واقعی به بازهٔ ۹۸ تا ۱۰۶ درصد محدود شده است.",
     baselineLabel: "خط مبنا ۱۰۰٪",
-    immutableNote: "گزارش هر روز ساعت ۰۹:۰۰ تولید و بایگانی می‌شود و پس از انتشار تغییر نمی‌کند.",
+    immutableNote: "گزارش هر ماه تولید و بایگانی می‌شود و پس از انتشار تغییر نمی‌کند.",
     howCalculated: {
       title: "این عدد چطور محاسبه می‌شود؟",
       steps: [
@@ -137,7 +137,7 @@ export const copy = {
     states: {
       unavailable: "نسبت پوشش در دسترس نیست — در حال بررسی",
       stale: "داده قدیمی",
-      downloadDisabled: "به‌دلیل قطع موقت اتصال به منبع، دانلود گزارش مهر ماه فعلاً در دسترس نیست.",
+      downloadDisabled: "به‌دلیل قطع موقت اتصال به منبع، دانلود گزارش فعلاً در دسترس نیست.",
     },
     disclosurePolicy: {
       thresholdMessage:
@@ -241,8 +241,8 @@ export const copy = {
 
   finalCta: {
     title: "شفافیت را خودتان بررسی کنید.",
-    subtitle: "گزارش مهر ماه را دانلود کنید یا مسیر برداشت را با ۱۰٬۰۰۰ تومان تست کنید.",
-    ctaPrimary: "دانلود گزارش مهر ماه",
+    subtitle: "گزارش را دانلود کنید یا مسیر برداشت را با ۱۰٬۰۰۰ تومان تست کنید.",
+    ctaPrimary: "دانلود گزارش",
     ctaSecondary: "تست دریافت وجه",
   },
 
@@ -314,7 +314,6 @@ export const copy = {
       feeFrom: "هزینه از ۳۵۰٬۰۰۰ تومان",
       timing: "از ۱ روز کاری بعد",
     },
-    cta: "شرایط کامل دریافت فیزیکی",
   },
 
   deliveryCenter: {

@@ -2,7 +2,6 @@ import { copy } from "@/content/copy.fa";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Chip } from "@/components/ui/Chip";
-import { Button } from "@/components/ui/Button";
 
 export function PhysicalDelivery() {
   const t = copy.physicalDelivery;
@@ -20,7 +19,7 @@ export function PhysicalDelivery() {
           {t.steps.map((step, idx) => (
             <Reveal key={step.number} delay={idx * 0.05}>
               <div className="relative border-t-2 border-gold pt-4">
-                <span className="font-mono-id text-xs font-bold text-gold-dim">{step.number}</span>
+                <span className="tabular-nums text-xs font-bold text-gold-dim">{step.number}</span>
                 <p className="mt-2 text-sm font-bold text-ink-900">{step.title}</p>
                 <p className="mt-2 text-sm leading-7 text-muted">{step.description}</p>
               </div>
@@ -33,11 +32,6 @@ export function PhysicalDelivery() {
             <Chip tone="neutral">{t.chips.minGrams}</Chip>
             <Chip tone="neutral">{t.chips.feeFrom}</Chip>
             <Chip tone="neutral">{t.chips.timing}</Chip>
-          </div>
-          <div className="mt-6">
-            <Button href="/physical-delivery-terms" variant="ghost" size="md">
-              {t.cta}
-            </Button>
           </div>
         </Reveal>
       </div>

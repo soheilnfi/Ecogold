@@ -14,7 +14,7 @@ export function SiteFooter() {
 
         <div>
           <p className="eyebrow eyebrow-on-vault mb-3">{support.title}</p>
-          <p className="font-mono-id text-sm text-vault-ink" dir="ltr">
+          <p className="tabular-nums text-sm text-vault-ink" dir="ltr">
             {support.phone}
           </p>
           <p className="mt-2 text-sm text-vault-muted">{support.hours}</p>
