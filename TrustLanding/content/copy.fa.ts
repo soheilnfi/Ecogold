@@ -130,7 +130,7 @@ export const copy = {
     },
     archive: {
       title: "گزارش‌های قبلی",
-      columns: { date: "تاریخ", ratio: "نسبت", id: "شناسهٔ گزارش", size: "حجم فایل", download: "دانلود" },
+      columns: { date: "تاریخ", size: "حجم فایل", download: "دانلود" },
       filterAllMonths: "همهٔ ماه‌ها",
       pageSize: 20,
     },

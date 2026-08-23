@@ -167,8 +167,6 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
             <thead>
               <tr className="border-b border-line text-xs text-muted">
                 <th className="py-2 font-bold">{copy.coverageReport.archive.columns.date}</th>
-                <th className="py-2 font-bold">{copy.coverageReport.archive.columns.ratio}</th>
-                <th className="py-2 font-bold">{copy.coverageReport.archive.columns.id}</th>
                 <th className="py-2 font-bold">{copy.coverageReport.archive.columns.size}</th>
                 <th className="py-2 font-bold">{copy.coverageReport.archive.columns.download}</th>
               </tr>
@@ -177,8 +175,6 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
               {pageRows.map((row) => (
                 <tr key={row.date}>
                   <td className="py-2 tabular-nums">{formatJalaliDate(row.date)}</td>
-                  <td className="py-2 tabular-nums">{formatPercent(row.ratio)}</td>
-                  <td className="py-2 font-mono-id">{deriveReportId(row.date)}</td>
                   <td className="py-2 tabular-nums text-muted">{formatFileSize(deriveSize(row.date))}</td>
                   <td className="py-2">
                     <a
