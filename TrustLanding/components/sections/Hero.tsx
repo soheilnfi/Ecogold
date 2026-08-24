@@ -1,6 +1,7 @@
 import { copy } from "@/content/copy.fa";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { MaskedPhotoBadge } from "@/components/ui/MaskedPhotoBadge";
 import type { CoverageDisclosurePolicy } from "@/lib/coverage-disclosure";
 import { HeroCoverageScale } from "./HeroCoverageScale";
 
@@ -32,8 +33,9 @@ export function Hero({ policy }: { policy: CoverageDisclosurePolicy }) {
           </div>
         </div>
 
-        <div className="flex justify-center lg:justify-end">
+        <div className="relative flex justify-center lg:justify-end">
           <HeroCoverageScale policy={policy} />
+          <MaskedPhotoBadge className="absolute -top-2 -right-2 sm:-top-4 sm:-right-6" />
         </div>
       </div>
     </section>
