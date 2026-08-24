@@ -46,6 +46,13 @@ export function formatFileSize(bytes: number): string {
   return `${toPersianDecimal(mb.toFixed(1))} مگابایت`;
 }
 
+/** «۰:۴۵» — ثانیه به قالب دقیقه:ثانیه با ارقام فارسی، برای مدت‌زمان ویس */
+export function formatDuration(totalSeconds: number): string {
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = Math.round(totalSeconds % 60);
+  return toPersianDigits(`${minutes}:${String(seconds).padStart(2, "0")}`);
+}
+
 export function formatCount(value: number): string {
   return toPersianDigits(numberFormatter.format(Math.round(value))).replace(/,/g, "٬");
 }

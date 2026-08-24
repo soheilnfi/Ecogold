@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   formatCount,
   formatDecimal,
+  formatDuration,
   formatFileSize,
   formatGrams,
   formatNumber,
@@ -79,5 +80,19 @@ describe("formatCount", () => {
 describe("formatDecimal", () => {
   it("formats a decimal with persian digits and separator, no unit", () => {
     expect(formatDecimal(4.7)).toBe("۴٫۷");
+  });
+});
+
+describe("formatDuration", () => {
+  it("formats seconds under a minute", () => {
+    expect(formatDuration(45)).toBe("۰:۴۵");
+  });
+
+  it("formats minutes and seconds with a padded second", () => {
+    expect(formatDuration(65)).toBe("۱:۰۵");
+  });
+
+  it("formats exact minutes", () => {
+    expect(formatDuration(120)).toBe("۲:۰۰");
   });
 });

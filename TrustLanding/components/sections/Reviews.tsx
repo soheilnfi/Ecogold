@@ -10,6 +10,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Card } from "@/components/ui/Card";
 import { Chip } from "@/components/ui/Chip";
 import { Modal } from "@/components/ui/Modal";
+import { VoicePlayer } from "@/components/ui/VoicePlayer";
 import type { ReviewsResponse } from "@/lib/mock/reviews";
 
 function Stars({ rating }: { rating: number }) {
@@ -22,8 +23,9 @@ function Stars({ rating }: { rating: number }) {
 }
 
 export function Reviews() {
-  const { data, fetchFailed, loading } = useLiveData<ReviewsResponse>("/api/reviews?limit=6");
+  const { data, fetchFailed, loading } = useLiveData<ReviewsResponse>("/api/reviews?limit=12");
   const [modalOpen, setModalOpen] = useState(false);
+  const [playingId, setPlayingId] = useState<string | null>(null);
   const t = copy.reviews;
 
   const unavailable = fetchFailed || !data || data.status === "unavailable" || data.total === 0;
@@ -75,6 +77,14 @@ export function Reviews() {
                       {review.verified && <Chip tone="ok">{t.verifiedBadge}</Chip>}
                     </div>
                     <p className="mt-3 flex-1 text-sm leading-7 text-ink-700">{review.text}</p>
+                    <VoicePlayer
+                      durationSeconds={review.voiceDurationSeconds}
+                      playing={playingId === review.id}
+                      onPlayToggle={() =>
+                        setPlayingId((current) => (current === review.id ? null : review.id))
+                      }
+                      className="mt-4"
+                    />
                     <div className="mt-4 flex items-center justify-between text-xs text-muted">
                       <span>{review.name}</span>
                       <span>{formatJalaliDate(review.date)}</span>
