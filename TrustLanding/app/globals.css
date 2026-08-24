@@ -145,6 +145,12 @@ body {
   color: var(--vault-muted);
 }
 
+/* پترن نقطه‌چین ملایم برای سکشن‌های خزانه — فقط بافت، بدون گرادیان/درخشش */
+.pattern-dots-vault {
+  background-image: radial-gradient(circle, var(--vault-line) 1px, transparent 1.6px);
+  background-size: 20px 20px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

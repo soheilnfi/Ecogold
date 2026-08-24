@@ -8,6 +8,7 @@ import {
   formatNumber,
   formatPercent,
   formatToman,
+  toLatinDigits,
   toPersianDigits,
 } from "./format";
 
@@ -18,6 +19,12 @@ describe("toPersianDigits", () => {
 
   it("leaves non-digit characters untouched", () => {
     expect(toPersianDigits("CVG-14050324")).toBe("CVG-۱۴۰۵۰۳۲۴");
+  });
+});
+
+describe("toLatinDigits", () => {
+  it("converts persian digits back to latin", () => {
+    expect(toLatinDigits("۰۲۱-۸۲۸۰۰۸۶۰")).toBe("021-82800860");
   });
 });
 

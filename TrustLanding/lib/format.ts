@@ -5,6 +5,11 @@ export function toPersianDigits(input: string | number): string {
   return String(input).replace(/[0-9]/g, (d) => PERSIAN_DIGITS[Number(d)]);
 }
 
+/** برعکس toPersianDigits — برای href="tel:" و سایر زمینه‌های ماشین‌خوان */
+export function toLatinDigits(input: string): string {
+  return input.replace(/[۰-۹]/g, (d) => String(PERSIAN_DIGITS.indexOf(d)));
+}
+
 const numberFormatter = new Intl.NumberFormat("en-US");
 
 /** «۰٫۵۰» — رقم اعشاری لاتین (.) را به جداکنندهٔ فارسی (٫) تبدیل می‌کند */

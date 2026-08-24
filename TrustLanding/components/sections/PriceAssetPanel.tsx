@@ -52,32 +52,47 @@ export function PriceAssetPanel({ asset }: { asset: AssetKey }) {
       {loading ? (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="h-20 animate-pulse rounded-card bg-surface-2" />
+            <div key={i} className="h-20 animate-pulse rounded-card bg-vault-700" />
           ))}
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {cells.map((cell) => (
-            <div key={cell.label} className="rounded-card border border-line bg-surface p-4">
-              <p className="text-xs text-muted">{cell.label}</p>
-              <p className="mt-2 text-sm font-bold tabular-nums text-ink-900">{cell.value}</p>
+            <div key={cell.label} className="rounded-card border border-vault-line bg-vault-700 p-4">
+              <p className="text-xs text-vault-muted">{cell.label}</p>
+              <p
+                className={
+                  cell.label === t.labels.spread
+                    ? "mt-2 text-sm font-bold tabular-nums text-gold"
+                    : "mt-2 text-sm font-bold tabular-nums text-vault-ink"
+                }
+              >
+                {cell.value}
+              </p>
             </div>
           ))}
         </div>
       )}
 
       <div className="mt-4 flex items-center justify-between gap-3">
-        {!loading && <FreshnessSeal status={status} asOf={data?.asOf ?? null} variant="relative" />}
-        <p className="text-xs text-muted">{t.updateNote}</p>
+        {!loading && (
+          <FreshnessSeal status={status} asOf={data?.asOf ?? null} variant="relative" onVault />
+        )}
+        <p className="text-xs text-vault-muted">{t.updateNote}</p>
       </div>
 
-      <div className="mt-8 rounded-card border border-line bg-surface p-5 sm:p-6">
-        <p className="text-sm font-bold text-ink-900">{t.spreadExplainer.title}</p>
-        <p className="mt-2 text-sm leading-7 text-muted">{t.spreadExplainer.body}</p>
-      </div>
+      <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="rounded-card border border-vault-line bg-vault-700 p-5 sm:p-6">
+          <p className="text-sm font-bold text-vault-ink">{t.spreadExplainer.title}</p>
+          <p className="mt-2 text-sm leading-7 text-vault-muted">{t.spreadExplainer.body}</p>
+        </div>
 
-      <div className="mt-6">
-        <SpreadCalculator buy={unavailable ? null : data!.buy} sell={unavailable ? null : data!.sell} disabled={unavailable} />
+        <SpreadCalculator
+          buy={unavailable ? null : data!.buy}
+          sell={unavailable ? null : data!.sell}
+          disabled={unavailable}
+          onVault
+        />
       </div>
     </div>
   );

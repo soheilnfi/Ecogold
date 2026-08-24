@@ -12,10 +12,12 @@ export interface TabItem {
 export function Tabs({
   items,
   defaultKey,
+  onVault = false,
   className,
 }: {
   items: TabItem[];
   defaultKey?: string;
+  onVault?: boolean;
   className?: string;
 }) {
   const [active, setActive] = useState(defaultKey ?? items[0]?.key);
@@ -42,7 +44,10 @@ export function Tabs({
         role="tablist"
         aria-orientation="horizontal"
         onKeyDown={onKeyDown}
-        className="inline-flex gap-1 rounded-pill border border-line bg-surface-2 p-1"
+        className={cn(
+          "inline-flex gap-1 rounded-pill border p-1",
+          onVault ? "border-vault-line bg-vault-700" : "border-line bg-surface-2"
+        )}
       >
         {items.map((item, idx) => {
           const selected = item.key === active;
@@ -60,7 +65,13 @@ export function Tabs({
               onClick={() => setActive(item.key)}
               className={cn(
                 "rounded-pill px-5 py-2 text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold",
-                selected ? "bg-ink-900 text-white" : "text-ink-500 hover:text-ink-900"
+                onVault
+                  ? selected
+                    ? "bg-gold text-ink-on-gold"
+                    : "text-vault-muted hover:text-vault-ink"
+                  : selected
+                    ? "bg-ink-900 text-white"
+                    : "text-ink-500 hover:text-ink-900"
               )}
             >
               {item.label}

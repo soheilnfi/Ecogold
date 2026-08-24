@@ -8,16 +8,17 @@ export function PriceTransparency() {
   const t = copy.priceTransparency;
 
   return (
-    <section id="price" className="scroll-mt-20 border-b border-line">
+    <section id="price" className="scroll-mt-20 bg-vault-900 pattern-dots-vault text-vault-ink">
       <div className="mx-auto max-w-[1160px] px-5 py-16 sm:py-24">
         <Reveal>
-          <Eyebrow>{t.eyebrow}</Eyebrow>
-          <h2 className="mt-3 text-h2 font-black text-ink-900">{t.title}</h2>
-          <p className="mt-3 max-w-xl text-sm leading-7 text-muted">{t.subtitle}</p>
+          <Eyebrow onVault>{t.eyebrow}</Eyebrow>
+          <h2 className="mt-3 text-h2 font-black">{t.title}</h2>
+          <p className="mt-3 max-w-xl text-sm leading-7 text-vault-muted">{t.subtitle}</p>
         </Reveal>
 
         <Reveal delay={0.05} className="mt-10">
           <Tabs
+            onVault
             items={[
               { key: "gold", label: t.tabs.gold, content: <PriceAssetPanel asset="gold" /> },
               { key: "silver", label: t.tabs.silver, content: <PriceAssetPanel asset="silver" /> },

@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { copy } from "@/content/copy.fa";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Chip } from "@/components/ui/Chip";
 import { isBranchOpenNow } from "@/lib/branch-hours";
+import { toLatinDigits } from "@/lib/format";
 
 const CHECK_INTERVAL_MS = 60_000;
 
@@ -35,12 +37,18 @@ export function DeliveryCenter() {
         <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1fr]">
           <Reveal delay={0.05}>
             <div className="grid grid-cols-3 gap-2">
-              {[0, 1, 2].map((i) => (
+              {b.photos.map((photo) => (
                 <div
-                  key={i}
-                  className="flex aspect-square items-center justify-center rounded-card border border-dashed border-vault-line p-3 text-center text-[11px] leading-5 text-vault-muted"
+                  key={photo.src}
+                  className="relative aspect-square overflow-hidden rounded-card border border-vault-line"
                 >
-                  {b.photoPlaceholder}
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes="(min-width: 1024px) 190px, 33vw"
+                    className="object-cover"
+                  />
                 </div>
               ))}
             </div>
@@ -57,9 +65,6 @@ export function DeliveryCenter() {
             <p className="mt-2 text-sm text-vault-muted">{b.hoursWeekdays}</p>
             <p className="text-sm text-vault-muted">{b.hoursThursday}</p>
             <p className="text-sm text-vault-muted">{b.closedFriday}</p>
-            <p className="mt-3 tabular-nums text-sm" dir="ltr">
-              {b.phone}
-            </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
               <Button
@@ -71,6 +76,14 @@ export function DeliveryCenter() {
                 className="!border-vault-line !text-vault-ink hover:!border-gold"
               >
                 {b.directionsCta}
+              </Button>
+              <Button
+                href={`tel:${toLatinDigits(b.phone).replace(/-/g, "")}`}
+                variant="ghost"
+                size="md"
+                className="!border-vault-line !text-vault-ink hover:!border-gold"
+              >
+                {b.callCta}
               </Button>
             </div>
           </Reveal>

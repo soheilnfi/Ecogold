@@ -182,7 +182,6 @@ export const copy = {
   faq: {
     eyebrow: "پرسش‌های متداول",
     title: "اعتماد و امنیت",
-    searchPlaceholder: "در پرسش‌ها جست‌وجو کنید…",
     categories: {
       backing: "پشتوانه و دارایی",
       pricing: "قیمت و کارمزد",
@@ -336,7 +335,21 @@ export const copy = {
       openNow: "الان باز است",
       closedNow: "الان بسته است",
       directionsCta: "مسیریابی",
-      photoPlaceholder: "به‌زودی: عکس واقعی از این شعبه",
+      callCta: "تماس بگیرید",
+      photos: [
+        {
+          src: "/images/branch/branch-3.jpg",
+          alt: "نمای بیرونی درگاه شعبهٔ ناصر خسرو، پاساژ شمس‌العماره، واحد ۴۱۸",
+        },
+        {
+          src: "/images/branch/branch-2.jpg",
+          alt: "تابلوی برند اکوگلد روی پیشخوان شعبه",
+        },
+        {
+          src: "/images/branch/branch-1.jpg",
+          alt: "پیشخوان پذیرش شعبه با نمایشگر قیمت لحظه‌ای و مجوزهای نصب‌شده روی دیوار",
+        },
+      ],
     },
   },
 
