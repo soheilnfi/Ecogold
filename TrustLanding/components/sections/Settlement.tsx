@@ -1,7 +1,7 @@
 import { copy } from "@/content/copy.fa";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
-import { PayoutTestWidget } from "@/components/data/PayoutTestWidget";
+import { Chip } from "@/components/ui/Chip";
 
 export function Settlement() {
   const t = copy.settlement;
@@ -36,9 +36,18 @@ export function Settlement() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            {/* بدون بک‌اند واقعی/حساب کاربری در این پروژه؛ برای نمایش تعاملی کامل
-                فلو، حالت پیش‌فرض «واجد شرایط» است — نه یک بررسی احراز هویت واقعی */}
-            <PayoutTestWidget userState="eligible" />
+            <div className="overflow-hidden rounded-card border border-line bg-surface">
+              <div className="flex aspect-[16/9] items-center justify-center border-b border-line bg-surface-2 p-6 text-center text-sm text-muted">
+                {t.banner.photoPlaceholder}
+              </div>
+              <div className="p-6 sm:p-8">
+                <Chip tone="neutral" className="tabular-nums">
+                  {t.banner.dateBadge}
+                </Chip>
+                <h3 className="mt-4 text-h3 font-bold text-ink-900">{t.banner.title}</h3>
+                <p className="mt-2 text-sm leading-7 text-muted">{t.banner.description}</p>
+              </div>
+            </div>
           </Reveal>
         </div>
       </div>
