@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { formatFriendlyDateTime } from "@/lib/jalali";
 import { formatToman, toPersianDigits } from "@/lib/format";
 import { Button } from "@/components/ui/Button";
+import { Chip } from "@/components/ui/Chip";
 import { copy } from "@/content/copy.fa";
 import { cn } from "@/lib/cn";
 
@@ -69,7 +70,10 @@ export function PayoutTestWidget({
 
   return (
     <div className="rounded-card border-2 border-gold bg-surface p-6 sm:p-8">
-      <h3 className="text-h3 font-bold text-ink-900">{t.title}</h3>
+      <Chip tone="ok" icon={<span className="size-1.5 rounded-full bg-ok motion-safe:animate-pulse" />}>
+        {t.availabilityBadge}
+      </Chip>
+      <h3 className="mt-3 text-h3 font-bold text-ink-900">{t.title}</h3>
       <p className="mt-2 text-sm leading-7 text-ink-500">{t.description(formatToman(TEST_AMOUNT))}</p>
 
       <div className="mt-5">
