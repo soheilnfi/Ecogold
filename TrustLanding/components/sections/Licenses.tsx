@@ -8,7 +8,9 @@ import { formatJalaliDate } from "@/lib/jalali";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Modal } from "@/components/ui/Modal";
+import { Button } from "@/components/ui/Button";
 import { ExternalLinkArrow } from "@/components/ui/ExternalLinkArrow";
+import { ReceiptSlider } from "@/components/ui/ReceiptSlider";
 import type { LicenseItem, LicensesResponse } from "@/lib/mock/licenses";
 
 function ExpandIcon({ className }: { className?: string }) {
@@ -34,6 +36,7 @@ function ExpandIcon({ className }: { className?: string }) {
 export function Licenses() {
   const { data, loading } = useLiveData<LicensesResponse>("/api/licenses");
   const [openItem, setOpenItem] = useState<LicenseItem | null>(null);
+  const [receiptsOpen, setReceiptsOpen] = useState(false);
 
   const activeItems = useMemo(() => {
     const items = data?.items ?? [];
@@ -54,9 +57,16 @@ export function Licenses() {
     <section id="licenses" className="scroll-mt-20 border-b border-line">
       <div className="mx-auto max-w-[1160px] px-5 py-16 sm:py-24">
         <Reveal>
-          <Eyebrow>{copy.licenses.eyebrow}</Eyebrow>
-          <h2 className="mt-3 text-h2 font-black text-ink-900">{copy.licenses.title}</h2>
-          <p className="mt-3 max-w-xl text-sm leading-7 text-muted">{copy.licenses.subtitle}</p>
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <Eyebrow>{copy.licenses.eyebrow}</Eyebrow>
+              <h2 className="mt-3 text-h2 font-black text-ink-900">{copy.licenses.title}</h2>
+              <p className="mt-3 max-w-xl text-sm leading-7 text-muted">{copy.licenses.subtitle}</p>
+            </div>
+            <Button variant="ghost" size="md" onClick={() => setReceiptsOpen(true)}>
+              {copy.licenses.bankDepositCta}
+            </Button>
+          </div>
         </Reveal>
 
         {loading ? (
@@ -135,6 +145,15 @@ export function Licenses() {
             )}
           </>
         )}
+      </Modal>
+
+      <Modal
+        open={receiptsOpen}
+        onClose={() => setReceiptsOpen(false)}
+        title={copy.licenses.bankDepositModalTitle}
+      >
+        <p className="mb-4 text-sm leading-7 text-muted">{copy.licenses.bankDepositNote}</p>
+        <ReceiptSlider items={copy.licenses.bankDepositReceipts} />
       </Modal>
     </section>
   );

@@ -138,6 +138,14 @@ export const copy = {
     verifyLink: "راستی‌آزمایی در سامانهٔ مرجع",
     validUntilLabel: "تاریخ اعتبار",
     numberLabel: "شمارهٔ مجوز",
+    bankDepositCta: "رسیدهای سپرده بانک کارگشایی",
+    bankDepositModalTitle: "رسیدهای سپرده در بانک کارگشایی",
+    bankDepositNote:
+      "بر اساس دستورالعمل بانک مرکزی، موجودی طلای کاربران در ذخایر امن بانکی نگهداری می‌شود.",
+    bankDepositReceipts: Array.from({ length: 18 }, (_, i) => ({
+      src: `/images/bank-deposit/receipt-${i + 1}.jpg`,
+      alt: `رسید سپرده شمارهٔ ${i + 1}`,
+    })),
   },
 
   priceTransparency: {
