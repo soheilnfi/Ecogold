@@ -2,7 +2,8 @@ import { copy } from "@/content/copy.fa";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Chip } from "@/components/ui/Chip";
-import { PayoutBannerIllustration } from "@/components/ui/PayoutBannerIllustration";
+import { Button } from "@/components/ui/Button";
+import { PhotoCarousel } from "@/components/ui/PhotoCarousel";
 
 export function Settlement() {
   const t = copy.settlement;
@@ -38,15 +39,16 @@ export function Settlement() {
 
           <Reveal delay={0.1}>
             <div className="overflow-hidden rounded-card border border-line bg-surface">
-              <div className="aspect-[16/9] border-b border-line">
-                <PayoutBannerIllustration className="h-full w-full" />
-              </div>
+              <PhotoCarousel slides={t.banner.slides} />
               <div className="p-6 sm:p-8">
                 <Chip tone="neutral" className="tabular-nums">
                   {t.banner.dateBadge}
                 </Chip>
                 <h3 className="mt-4 text-h3 font-bold text-ink-900">{t.banner.title}</h3>
                 <p className="mt-2 text-sm leading-7 text-muted">{t.banner.description}</p>
+                <Button href="/login" size="md" className="mt-4">
+                  {t.banner.ctaLabel}
+                </Button>
               </div>
             </div>
           </Reveal>
