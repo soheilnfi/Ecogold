@@ -1,4 +1,4 @@
-import { formatFriendlyDateTime, formatRelativeFromNow } from "@/lib/jalali";
+import { formatFriendlyDateTime, formatJalaliDate, formatRelativeFromNow } from "@/lib/jalali";
 import type { FreshnessStatus } from "@/lib/freshness";
 import { cn } from "@/lib/cn";
 
@@ -29,7 +29,7 @@ export function FreshnessSeal({
   status: FreshnessStatus;
   asOf: string | null;
   now?: number;
-  variant?: "datetime" | "relative";
+  variant?: "datetime" | "relative" | "date";
   onVault?: boolean;
   className?: string;
 }) {
@@ -37,7 +37,9 @@ export function FreshnessSeal({
     status !== "unavailable" && asOf
       ? variant === "relative"
         ? formatRelativeFromNow(asOf, now)
-        : formatFriendlyDateTime(asOf, now)
+        : variant === "date"
+          ? formatJalaliDate(asOf)
+          : formatFriendlyDateTime(asOf, now)
       : null;
 
   return (

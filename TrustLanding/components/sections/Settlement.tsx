@@ -11,15 +11,13 @@ export function Settlement() {
   return (
     <section id="settlement" className="scroll-mt-20 border-b border-line">
       <div className="mx-auto max-w-[1160px] px-5 py-16 sm:py-24">
-        <Reveal>
-          <Eyebrow>{t.eyebrow}</Eyebrow>
-          <h2 className="mt-3 text-h2 font-black text-ink-900">{t.title}</h2>
-          <p className="mt-3 max-w-xl text-sm leading-7 text-muted">{t.subtitle}</p>
-        </Reveal>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.1fr]">
+          <Reveal>
+            <Eyebrow>{t.eyebrow}</Eyebrow>
+            <h2 className="mt-3 text-h2 font-black text-ink-900">{t.title}</h2>
+            <p className="mt-3 max-w-xl text-sm leading-7 text-muted">{t.subtitle}</p>
 
-        <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.1fr]">
-          <Reveal delay={0.05}>
-            <ul className="flex flex-col gap-6">
+            <ul className="mt-10 flex flex-col gap-6">
               {t.slaRows.map((row) => (
                 <li key={row.label} className="flex gap-3">
                   <span

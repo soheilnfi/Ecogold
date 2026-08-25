@@ -31,14 +31,16 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
   const { data, status, ratio, display, loading } = useCoverageData(policy);
   const [archiveOpen, setArchiveOpen] = useState(false);
 
-  const chartData = useMemo(
-    () => (data?.history ?? []).slice(-30).map((p) => ({ ...p, dateLabel: formatJalaliDate(p.date) })),
-    [data]
-  );
+  const chartData = useMemo(() => {
+    const cutoff = Date.now() - 30 * 24 * 60 * 60_000;
+    return (data?.history ?? [])
+      .filter((p) => new Date(p.date).getTime() >= cutoff)
+      .map((p) => ({ ...p, dateLabel: formatJalaliDate(p.date) }));
+  }, [data]);
 
   const archiveRows = useMemo(() => {
     const all = data?.history ?? [];
-    return [...all].reverse();
+    return [...all].reverse().slice(0, 10);
   }, [data]);
 
   const unavailable = status === "unavailable";
@@ -82,7 +84,9 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
                 </p>
               )}
               <p className="mt-2 text-sm text-vault-muted">{copy.coverageReport.ratioCaption}</p>
-              {!loading && <FreshnessSeal status={status} asOf={data?.asOf ?? null} onVault />}
+              {!loading && (
+                <FreshnessSeal status={status} asOf={data?.asOf ?? null} variant="date" onVault />
+              )}
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button
@@ -97,7 +101,7 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
                   variant="ghost"
                   size="md"
                   onClick={() => !numericHidden && setArchiveOpen(true)}
-                  className={`!border-vault-line !text-vault-ink hover:!border-gold ${numericHidden ? "pointer-events-none opacity-40" : ""}`}
+                  className={`!border-vault-line !text-vault-ink hover:!border-gold hover:!bg-vault-700 hover:!text-gold ${numericHidden ? "pointer-events-none opacity-40" : ""}`}
                 >
                   {copy.coverageReport.viewArchive}
                 </Button>
@@ -160,17 +164,17 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
           <table className="w-full text-right text-sm">
             <thead className="sticky top-0 bg-surface">
               <tr className="border-b border-line text-xs text-muted">
-                <th className="py-2 font-bold">{copy.coverageReport.archive.columns.date}</th>
-                <th className="py-2 font-bold">{copy.coverageReport.archive.columns.size}</th>
-                <th className="py-2 font-bold">{copy.coverageReport.archive.columns.download}</th>
+                <th className="py-3 font-bold">{copy.coverageReport.archive.columns.date}</th>
+                <th className="py-3 font-bold">{copy.coverageReport.archive.columns.size}</th>
+                <th className="py-3 font-bold">{copy.coverageReport.archive.columns.download}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-line">
               {archiveRows.map((row) => (
                 <tr key={row.date}>
-                  <td className="py-2 tabular-nums">{formatJalaliDate(row.date)}</td>
-                  <td className="py-2 tabular-nums text-muted">{formatFileSize(deriveSize(row.date))}</td>
-                  <td className="py-2">
+                  <td className="py-4 tabular-nums">{formatJalaliDate(row.date)}</td>
+                  <td className="py-4 tabular-nums text-muted">{formatFileSize(deriveSize(row.date))}</td>
+                  <td className="py-4">
                     <a
                       href={`/reports/${deriveReportId(row.date)}.pdf`}
                       className="font-bold text-info hover:underline"

@@ -34,70 +34,78 @@ export function DeliveryCenter() {
           <p className="mt-3 max-w-xl text-sm leading-7 text-vault-muted">{t.subtitle}</p>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[1.35fr_1fr]">
-          <Reveal delay={0.05}>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="relative col-span-2 aspect-[16/10] overflow-hidden rounded-card border border-vault-line shadow-xl shadow-black/30">
-                <Image
-                  src={b.photos[0].src}
-                  alt={b.photos[0].alt}
-                  fill
-                  sizes="(min-width: 1024px) 620px, 100vw"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              {b.photos.slice(1).map((photo) => (
-                <div
-                  key={photo.src}
-                  className="relative aspect-square overflow-hidden rounded-card border border-vault-line"
+        <Reveal delay={0.05}>
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="relative col-span-2 aspect-[16/10] overflow-hidden rounded-card border border-vault-line shadow-xl shadow-black/30">
+              <Image
+                src={b.photos[0].src}
+                alt={b.photos[0].alt}
+                fill
+                sizes="(min-width: 1024px) 620px, 100vw"
+                className="object-cover"
+                priority
+              />
+            </div>
+
+            <div className="col-span-1 flex aspect-square items-center justify-center rounded-card border border-vault-line bg-surface">
+              <span className="text-base font-black text-ink-900">{copy.header.logo}</span>
+            </div>
+
+            <div className="relative col-span-1 aspect-square overflow-hidden rounded-card border border-vault-line">
+              <Image
+                src={b.photos[1].src}
+                alt={b.photos[1].alt}
+                fill
+                sizes="(min-width: 1024px) 300px, 50vw"
+                className="object-cover"
+              />
+            </div>
+
+            <div className="col-span-2 rounded-card border border-vault-line bg-vault-700 p-6 sm:col-span-3">
+              <p className="text-sm font-bold">{b.title}</p>
+              {open !== null && (
+                <Chip tone={open ? "ok" : "unavailable"} className="mt-2">
+                  {open ? b.openNow : b.closedNow}
+                </Chip>
+              )}
+              <p className="mt-4 text-sm leading-7 text-vault-muted">{b.address}</p>
+              <p className="mt-2 text-sm text-vault-muted">{b.hoursWeekdays}</p>
+              <p className="text-sm text-vault-muted">{b.hoursThursday}</p>
+              <p className="text-sm text-vault-muted">{b.closedFriday}</p>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button
+                  href={mapsUrl}
+                  target="_blank"
+                  rel="noopener"
+                  variant="ghost"
+                  size="md"
+                  className="!border-vault-line !text-vault-ink hover:!border-gold"
                 >
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    sizes="(min-width: 1024px) 300px, 50vw"
-                    className="object-cover"
-                  />
-                </div>
-              ))}
+                  {b.directionsCta}
+                </Button>
+                <Button
+                  href={`tel:${toLatinDigits(b.phone).replace(/-/g, "")}`}
+                  variant="ghost"
+                  size="md"
+                  className="!border-vault-line !text-vault-ink hover:!border-gold"
+                >
+                  {b.callCta}
+                </Button>
+              </div>
             </div>
-          </Reveal>
 
-          <Reveal delay={0.1}>
-            <p className="text-sm font-bold">{b.title}</p>
-            {open !== null && (
-              <Chip tone={open ? "ok" : "unavailable"} className="mt-2">
-                {open ? b.openNow : b.closedNow}
-              </Chip>
-            )}
-            <p className="mt-4 text-sm leading-7 text-vault-muted">{b.address}</p>
-            <p className="mt-2 text-sm text-vault-muted">{b.hoursWeekdays}</p>
-            <p className="text-sm text-vault-muted">{b.hoursThursday}</p>
-            <p className="text-sm text-vault-muted">{b.closedFriday}</p>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button
-                href={mapsUrl}
-                target="_blank"
-                rel="noopener"
-                variant="ghost"
-                size="md"
-                className="!border-vault-line !text-vault-ink hover:!border-gold"
-              >
-                {b.directionsCta}
-              </Button>
-              <Button
-                href={`tel:${toLatinDigits(b.phone).replace(/-/g, "")}`}
-                variant="ghost"
-                size="md"
-                className="!border-vault-line !text-vault-ink hover:!border-gold"
-              >
-                {b.callCta}
-              </Button>
+            <div className="relative col-span-2 aspect-square overflow-hidden rounded-card border border-vault-line sm:col-span-1">
+              <Image
+                src={b.photos[2].src}
+                alt={b.photos[2].alt}
+                fill
+                sizes="(min-width: 1024px) 300px, 50vw"
+                className="object-cover"
+              />
             </div>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

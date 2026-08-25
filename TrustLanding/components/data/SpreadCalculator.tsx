@@ -1,11 +1,30 @@
 "use client";
 
 import { useState } from "react";
-import { formatGrams, formatPieces, formatToman } from "@/lib/format";
+import { formatGrams, formatPieces, formatToman, toLatinDigits, toPersianDigits } from "@/lib/format";
 import { copy } from "@/content/copy.fa";
 import { cn } from "@/lib/cn";
 
 type Mode = "quantity" | "toman";
+
+/** ورودی کاربر (فارسی/لاتین، با جداکننده یا بدون آن) را به رشتهٔ عددی خام (لاتین) تبدیل می‌کند */
+function toRawDigits(input: string): string {
+  const cleaned = toLatinDigits(input)
+    .replace(/[,٬]/g, "")
+    .replace(/٫/g, ".")
+    .replace(/[^\d.]/g, "");
+  const [intPart, ...rest] = cleaned.split(".");
+  return rest.length ? `${intPart}.${rest.join("")}` : intPart;
+}
+
+/** رشتهٔ عددی خام را برای نمایش در اینپوت با ارقام فارسی و جداکنندهٔ هزارگان قالب‌بندی می‌کند */
+function formatAmountDisplay(raw: string): string {
+  if (!raw) return "";
+  const [intPart, decPart] = raw.split(".");
+  const grouped = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const withPersianInt = toPersianDigits(grouped).replace(/,/g, "٬");
+  return decPart !== undefined ? `${withPersianInt}٫${toPersianDigits(decPart)}` : withPersianInt;
+}
 
 export function SpreadCalculator({
   buy,
@@ -82,13 +101,11 @@ export function SpreadCalculator({
       </div>
 
       <input
-        type="number"
-        min={0}
-        step="any"
+        type="text"
         inputMode="decimal"
         disabled={disabled}
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
+        value={formatAmountDisplay(amount)}
+        onChange={(e) => setAmount(toRawDigits(e.target.value))}
         aria-label={mode === "quantity" ? quantityLabel : t.inputTomanLabel}
         className={cn(
           "w-full rounded-md border px-4 py-2.5 text-sm tabular-nums focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-50",

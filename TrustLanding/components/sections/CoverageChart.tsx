@@ -25,9 +25,14 @@ export default function CoverageChart({
 }) {
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={chartData} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
+      <LineChart data={chartData} margin={{ top: 8, right: 8, left: 0, bottom: 4 }}>
         <CartesianGrid stroke="var(--vault-line)" vertical={false} />
-        <XAxis dataKey="dateLabel" hide />
+        <XAxis
+          dataKey="dateLabel"
+          tick={{ fill: "var(--vault-muted)", fontSize: 11 }}
+          tickLine={false}
+          axisLine={{ stroke: "var(--vault-line)" }}
+        />
         <YAxis
           domain={[98, 106]}
           tick={{ fill: "var(--vault-muted)", fontSize: 11 }}
@@ -56,7 +61,14 @@ export default function CoverageChart({
           formatter={(value) => [formatPercent(Number(value)), ratioCaption]}
           labelFormatter={(label) => label}
         />
-        <Line type="monotone" dataKey="ratio" stroke="var(--gold)" strokeWidth={2} dot={false} />
+        <Line
+          type="linear"
+          dataKey="ratio"
+          stroke="var(--gold)"
+          strokeWidth={2}
+          dot={{ r: 4, fill: "var(--gold)", strokeWidth: 0 }}
+          activeDot={{ r: 5 }}
+        />
       </LineChart>
     </ResponsiveContainer>
   );

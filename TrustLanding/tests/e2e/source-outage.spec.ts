@@ -4,12 +4,8 @@ test.describe("سناریوی قطع منبع", () => {
   test("هیچ عددی بدون داده سبز/معتبر نمایش داده نمی‌شود", async ({ page }) => {
     await page.goto("/?mock=unavailable");
 
-    // ترازوی هیرو: به‌جای عدد، پیام «در دسترس نیست»
+    // سکشن گزارش پوشش: به‌جای عدد، پیام «در دسترس نیست»
     await expect(page.getByText("نسبت پوشش در دسترس نیست")).toBeVisible();
-
-    // چیپ وضعیت هدر هرگز سبز نمی‌شود وقتی داده نیست
-    await expect(page.getByText("همهٔ سرویس‌ها فعال")).toHaveCount(0);
-    await expect(page.getByText("وضعیت در دسترس نیست").first()).toBeVisible();
 
     // سکشن وضعیت سرویس‌ها: پیام خنثی، نه کارت‌های سبز
     await expect(page.getByText("پایش موقتاً در دسترس نیست")).toBeVisible();

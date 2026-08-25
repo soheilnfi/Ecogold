@@ -50,7 +50,11 @@ export function Button(props: ButtonProps | LinkProps) {
     );
   }
 
-  const { type = "button", ...rest } = props as ButtonProps;
+  // variant/size/icon/className/children are already destructured above;
+  // exclude them here so they don't overwrite `classes` on the element below
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { type = "button", variant: _variant, size: _size, icon: _icon, className: _className, children: _children, ...rest } =
+    props as ButtonProps;
   return (
     <button type={type} className={classes} {...rest}>
       {children}

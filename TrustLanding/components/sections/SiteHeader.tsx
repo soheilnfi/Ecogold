@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { copy } from "@/content/copy.fa";
 import { Button } from "@/components/ui/Button";
-import { StatusChip } from "@/components/data/StatusChip";
 import { cn } from "@/lib/cn";
 
 export function SiteHeader() {
@@ -52,12 +51,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-3">
-          <div className="hidden md:block">
-            <StatusChip />
-          </div>
-          <Button href="#coverage" size="md" className="hidden sm:inline-flex">
-            {copy.header.ctaDownloadReport}
-          </Button>
           <Button href="/login" variant="ghost" size="md">
             {copy.header.ctaLogin}
           </Button>
