@@ -6,12 +6,6 @@ import { formatPercent, toPersianDigits } from "@/lib/format";
 import { cn } from "@/lib/cn";
 import type { ServiceDay } from "@/lib/mock/status";
 
-const BAR_TONE = (day: ServiceDay) => {
-  if (day.incidentMinutes === 0) return "bg-ok";
-  if (day.incidentMinutes <= 30) return "bg-warn";
-  return "bg-down";
-};
-
 /** نوار ۳۰ روزهٔ در دسترس‌بودن سرویس — الگوی صفحهٔ status صنعتی */
 export function UptimeStrip({ days, className }: { days: ServiceDay[]; className?: string }) {
   const [active, setActive] = useState<ServiceDay | null>(null);
@@ -31,12 +25,16 @@ export function UptimeStrip({ days, className }: { days: ServiceDay[]; className
             onFocus={() => setActive(day)}
             onMouseEnter={() => setActive(day)}
             onBlur={() => setActive(null)}
-            className={cn(
-              "h-6 w-[3px] shrink-0 rounded-full transition-transform focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold motion-safe:hover:scale-y-110",
-              BAR_TONE(day)
-            )}
+            className="relative h-6 w-[3px] shrink-0 rounded-full bg-ok transition-transform focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold motion-safe:hover:scale-y-110"
             aria-label={`${formatJalaliDate(day.date)} · ${formatPercent(day.uptime)}`}
-          />
+          >
+            {day.incidentMinutes > 0 && (
+              <span
+                aria-hidden="true"
+                className="absolute -top-1 left-1/2 size-1.5 -translate-x-1/2 rounded-full bg-down"
+              />
+            )}
+          </button>
         ))}
       </div>
       {active && (

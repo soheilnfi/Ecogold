@@ -25,7 +25,7 @@ export default function Home() {
     <>
       <SiteHeader />
       <main id="main-content" className="flex-1">
-        <Hero policy={coveragePolicy} />
+        <Hero />
         <EvidenceBar policy={coveragePolicy} />
         <ServiceStatus />
         <CoverageReport policy={coveragePolicy} />

@@ -1,11 +1,8 @@
 import { copy } from "@/content/copy.fa";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { MaskedPhotoBadge } from "@/components/ui/MaskedPhotoBadge";
-import type { CoverageDisclosurePolicy } from "@/lib/coverage-disclosure";
-import { HeroCoverageScale } from "./HeroCoverageScale";
 
-export function Hero({ policy }: { policy: CoverageDisclosurePolicy }) {
+export function Hero() {
   return (
     <section id="hero" className="scroll-mt-20 border-b border-line">
       <div className="mx-auto grid max-w-[1160px] grid-cols-1 items-center gap-12 px-5 py-16 sm:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
@@ -23,20 +20,9 @@ export function Hero({ policy }: { policy: CoverageDisclosurePolicy }) {
               {copy.hero.ctaSecondary}
             </Button>
           </div>
-          <div className="mt-8 flex items-center gap-4 border-t border-line pt-6">
-            {copy.hero.tickers.map((label, i) => (
-              <span key={label} className="flex items-center gap-4">
-                {i > 0 && <span className="h-3 w-px bg-gold" aria-hidden="true" />}
-                <span className="text-sm font-bold text-ink-700">{label}</span>
-              </span>
-            ))}
-          </div>
         </div>
 
-        <div className="relative flex justify-center lg:justify-end">
-          <HeroCoverageScale policy={policy} />
-          <MaskedPhotoBadge className="absolute -top-2 -right-2 sm:-top-4 sm:-right-6" />
-        </div>
+        <div className="aspect-square w-full max-w-md rounded-card border border-dashed border-line bg-surface-2 sm:aspect-[4/5]" />
       </div>
     </section>
   );

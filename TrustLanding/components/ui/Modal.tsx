@@ -61,7 +61,7 @@ export function Modal({
           <button
             onClick={onClose}
             aria-label="بستن"
-            className="rounded-full p-2 text-ink-500 hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="flex size-8 shrink-0 items-center justify-center rounded-full text-ink-500 hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             ×
           </button>

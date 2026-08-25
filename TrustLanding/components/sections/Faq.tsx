@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { copy } from "@/content/copy.fa";
+import { formatJalaliDate } from "@/lib/jalali";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Accordion } from "@/components/ui/Accordion";
@@ -40,6 +41,9 @@ export function Faq() {
         <Reveal>
           <Eyebrow>{copy.faq.eyebrow}</Eyebrow>
           <h2 className="mt-3 text-h2 font-black text-ink-900">{copy.faq.title}</h2>
+          <p className="mt-2 text-xs text-muted">
+            به‌روزرسانی: {formatJalaliDate(copy.faq.lastUpdated)}
+          </p>
         </Reveal>
 
         <div className="mt-8 flex flex-col gap-10">
