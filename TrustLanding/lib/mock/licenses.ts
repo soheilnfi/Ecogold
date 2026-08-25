@@ -29,7 +29,7 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       issuer: "اتحادیهٔ صنف فروشندگان طلا و جواهر",
       validUntil: "2027-03-20",
       verifyUrl: "https://iranasnaf.ir",
-      logoUrl: null,
+      logoUrl: "/images/licenses/business-license.jpg",
     },
     {
       key: "bank-deposit",
@@ -38,7 +38,7 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       issuer: "بانک مرکزی جمهوری اسلامی ایران",
       validUntil: "2027-01-10",
       verifyUrl: "https://cbi.ir",
-      logoUrl: null,
+      logoUrl: "/images/licenses/bank-deposit.jpg",
     },
     {
       key: "fintech-association",
@@ -47,7 +47,7 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       issuer: "انجمن فناوری‌های نوین مالی ایران",
       validUntil: "2026-11-30",
       verifyUrl: "https://ifta.ir",
-      logoUrl: null,
+      logoUrl: "/images/licenses/fintech-association.jpg",
     },
     {
       key: "chamber-of-commerce",
@@ -57,7 +57,7 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       issuer: "اتاق بازرگانی، صنایع، معادن و کشاورزی تهران",
       validUntil: "2026-05-01",
       verifyUrl: "https://tccim.ir",
-      logoUrl: null,
+      logoUrl: "/images/licenses/chamber-of-commerce.jpg",
     },
     {
       key: "computer-guild",
@@ -66,7 +66,7 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       issuer: "سازمان نظام صنفی رایانه‌ای کشور",
       validUntil: "2027-02-15",
       verifyUrl: "https://tvto-portal.ir",
-      logoUrl: null,
+      logoUrl: "/images/licenses/computer-guild.jpg",
     },
     {
       key: "enamad",
@@ -75,7 +75,7 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       issuer: "مرکز توسعهٔ تجارت الکترونیکی",
       validUntil: "2026-12-25",
       verifyUrl: "https://trustseal.enamad.ir",
-      logoUrl: null,
+      logoUrl: "/images/licenses/enamad.jpg",
     },
     {
       key: "payment-gateway",
