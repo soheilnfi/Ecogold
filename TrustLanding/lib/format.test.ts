@@ -7,6 +7,7 @@ import {
   formatGrams,
   formatNumber,
   formatPercent,
+  formatPieces,
   formatToman,
   toLatinDigits,
   toPersianDigits,
@@ -51,6 +52,16 @@ describe("formatGrams", () => {
 
   it("formats fractional grams", () => {
     expect(formatGrams(0.5)).toBe("۰٫۵۰ گرم");
+  });
+});
+
+describe("formatPieces", () => {
+  it("formats integers without decimals", () => {
+    expect(formatPieces(1)).toBe("۱ عدد");
+  });
+
+  it("formats fractional pieces", () => {
+    expect(formatPieces(0.5)).toBe("۰٫۵۰ عدد");
   });
 });
 

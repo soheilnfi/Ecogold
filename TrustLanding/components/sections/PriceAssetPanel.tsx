@@ -90,6 +90,7 @@ export function PriceAssetPanel({ asset }: { asset: AssetKey }) {
         <SpreadCalculator
           buy={unavailable ? null : data!.buy}
           sell={unavailable ? null : data!.sell}
+          unit={asset === "coin" ? "piece" : "gram"}
           disabled={unavailable}
           onVault
         />

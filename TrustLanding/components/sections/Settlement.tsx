@@ -2,6 +2,7 @@ import { copy } from "@/content/copy.fa";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Chip } from "@/components/ui/Chip";
+import { PayoutBannerIllustration } from "@/components/ui/PayoutBannerIllustration";
 
 export function Settlement() {
   const t = copy.settlement;
@@ -37,8 +38,8 @@ export function Settlement() {
 
           <Reveal delay={0.1}>
             <div className="overflow-hidden rounded-card border border-line bg-surface">
-              <div className="flex aspect-[16/9] items-center justify-center border-b border-line bg-surface-2 p-6 text-center text-sm text-muted">
-                {t.banner.photoPlaceholder}
+              <div className="aspect-[16/9] border-b border-line">
+                <PayoutBannerIllustration className="h-full w-full" />
               </div>
               <div className="p-6 sm:p-8">
                 <Chip tone="neutral" className="tabular-nums">

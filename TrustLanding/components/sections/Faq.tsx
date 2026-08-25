@@ -53,16 +53,7 @@ export function Faq() {
                 items={group.items.map((item) => ({
                   id: item.id,
                   question: item.question,
-                  answer: (
-                    <>
-                      {item.answer}{" "}
-                      {item.linkHref && (
-                        <a href={item.linkHref} className="font-bold text-info hover:underline">
-                          {item.linkLabel}
-                        </a>
-                      )}
-                    </>
-                  ),
+                  answer: item.answer,
                 }))}
               />
             </Reveal>

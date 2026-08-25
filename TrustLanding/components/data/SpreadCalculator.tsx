@@ -1,26 +1,30 @@
 "use client";
 
 import { useState } from "react";
-import { formatGrams, formatToman } from "@/lib/format";
+import { formatGrams, formatPieces, formatToman } from "@/lib/format";
 import { copy } from "@/content/copy.fa";
 import { cn } from "@/lib/cn";
 
-type Mode = "gram" | "toman";
+type Mode = "quantity" | "toman";
 
 export function SpreadCalculator({
   buy,
   sell,
+  unit = "gram",
   disabled = false,
   onVault = false,
 }: {
   buy: number | null;
   sell: number | null;
+  unit?: "gram" | "piece";
   disabled?: boolean;
   onVault?: boolean;
 }) {
-  const [mode, setMode] = useState<Mode>("gram");
+  const [mode, setMode] = useState<Mode>("quantity");
   const [amount, setAmount] = useState("1");
   const t = copy.priceTransparency.calculator;
+  const quantityLabel = unit === "piece" ? t.inputPieceLabel : t.inputGramLabel;
+  const formatQuantity = unit === "piece" ? formatPieces : formatGrams;
 
   const numericAmount = Number(amount);
   const isValid = Number.isFinite(numericAmount) && numericAmount > 0;
@@ -28,12 +32,12 @@ export function SpreadCalculator({
 
   let differenceLabel: string | null = null;
   if (canCalculate && buy !== null && sell !== null) {
-    if (mode === "gram") {
+    if (mode === "quantity") {
       const diff = numericAmount * (buy - sell);
       differenceLabel = formatToman(diff);
     } else {
-      const grams = numericAmount / buy;
-      const proceeds = grams * sell;
+      const units = numericAmount / buy;
+      const proceeds = units * sell;
       differenceLabel = formatToman(numericAmount - proceeds);
     }
   }
@@ -55,7 +59,7 @@ export function SpreadCalculator({
           onVault ? "border-vault-line bg-vault-900" : "border-line bg-surface"
         )}
       >
-        {(["gram", "toman"] as Mode[]).map((m) => (
+        {(["quantity", "toman"] as Mode[]).map((m) => (
           <button
             key={m}
             type="button"
@@ -72,7 +76,7 @@ export function SpreadCalculator({
                   : "text-ink-500 hover:text-ink-900"
             )}
           >
-            {m === "gram" ? t.inputGramLabel : t.inputTomanLabel}
+            {m === "quantity" ? quantityLabel : t.inputTomanLabel}
           </button>
         ))}
       </div>
@@ -85,7 +89,7 @@ export function SpreadCalculator({
         disabled={disabled}
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
-        aria-label={mode === "gram" ? t.inputGramLabel : t.inputTomanLabel}
+        aria-label={mode === "quantity" ? quantityLabel : t.inputTomanLabel}
         className={cn(
           "w-full rounded-md border px-4 py-2.5 text-sm tabular-nums focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-50",
           onVault
@@ -113,9 +117,9 @@ export function SpreadCalculator({
           <span className={onVault ? "text-vault-muted" : "text-muted"}>—</span>
         )}
       </p>
-      {mode === "gram" && !disabled && (
+      {mode === "quantity" && !disabled && (
         <p className={cn("mt-1 text-xs", onVault ? "text-vault-muted" : "text-muted")}>
-          {formatGrams(numericAmount || 0)}
+          {formatQuantity(numericAmount || 0)}
         </p>
       )}
     </div>

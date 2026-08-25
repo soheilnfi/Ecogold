@@ -33,6 +33,11 @@ export function formatGrams(value: number): string {
   return `${text} گرم`;
 }
 
+export function formatPieces(value: number): string {
+  const text = Number.isInteger(value) ? formatNumber(value) : toPersianDecimal(value.toFixed(2));
+  return `${text} عدد`;
+}
+
 /** درصد با اعشار فارسی (٫) و علامت ٪، مثل «۱۰۲٫۴٪» */
 export function formatPercent(value: number, decimals = 1): string {
   return `${toPersianDecimal(value.toFixed(decimals))}٪`;
