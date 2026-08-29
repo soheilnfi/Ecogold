@@ -1,5 +1,4 @@
 import { copy } from "@/content/copy.fa";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Tabs } from "@/components/ui/Tabs";
 import { PriceAssetPanel } from "./PriceAssetPanel";
@@ -11,8 +10,7 @@ export function PriceTransparency() {
     <section id="price" className="scroll-mt-20 bg-vault-900 pattern-dots-vault text-vault-ink">
       <div className="mx-auto max-w-[1160px] px-5 py-16 sm:py-24">
         <Reveal>
-          <Eyebrow onVault>{t.eyebrow}</Eyebrow>
-          <h2 className="mt-3 text-h2 font-black">{t.title}</h2>
+          <h2 className="text-h2 font-black">{t.title}</h2>
           <p className="mt-3 max-w-xl text-sm leading-7 text-vault-muted">{t.subtitle}</p>
         </Reveal>
 

@@ -94,7 +94,8 @@ export function ServiceStatus() {
 
         {!unavailable && data && (
           <p className="mt-6 text-xs text-muted">
-            {copy.serviceStatus.lastCheckedPrefix} {formatRelativeFromNow(data.asOf!)}
+            {copy.serviceStatus.lastCheckedPrefix} {formatRelativeFromNow(data.asOf!)} ·{" "}
+            {copy.serviceStatus.availabilityPeriodNote}
           </p>
         )}
       </div>

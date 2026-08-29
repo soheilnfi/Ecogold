@@ -1,6 +1,5 @@
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { SiteFooter } from "@/components/sections/SiteFooter";
-import { TopBanner } from "@/components/sections/TopBanner";
 import { Hero } from "@/components/sections/Hero";
 import { EvidenceBar } from "@/components/sections/EvidenceBar";
 import { ServiceStatus } from "@/components/sections/ServiceStatus";
@@ -26,7 +25,6 @@ export default function Home() {
   return (
     <>
       <SiteHeader />
-      <TopBanner />
       <main id="main-content" className="flex-1">
         <Hero />
         <EvidenceBar policy={coveragePolicy} />

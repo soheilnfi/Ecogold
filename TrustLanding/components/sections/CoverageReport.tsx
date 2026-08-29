@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { copy } from "@/content/copy.fa";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
@@ -52,8 +51,8 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
     <section id="coverage" className="scroll-mt-20 bg-vault-900 text-vault-ink">
       <div className="mx-auto max-w-[1160px] px-5 py-16 sm:py-24">
         <Reveal>
-          <Eyebrow onVault>{copy.coverageReport.eyebrow}</Eyebrow>
-          <h2 className="mt-3 text-h2 font-black">{copy.coverageReport.title}</h2>
+          <h2 className="text-h2 font-black">{copy.coverageReport.title}</h2>
+          <p className="mt-3 max-w-xl text-sm leading-7 text-vault-muted">{copy.coverageReport.subtitle}</p>
         </Reveal>
 
         <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-2">
@@ -85,7 +84,10 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
               )}
               <p className="mt-2 text-sm text-vault-muted">{copy.coverageReport.ratioCaption}</p>
               {!loading && (
-                <FreshnessSeal status={status} asOf={data?.asOf ?? null} variant="date" onVault />
+                <>
+                  <p className="mt-6 text-xs font-bold text-vault-ink">{copy.coverageReport.latestReportLabel}</p>
+                  <FreshnessSeal status={status} asOf={data?.asOf ?? null} variant="date" onVault />
+                </>
               )}
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -120,8 +122,7 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
 
           <Reveal delay={0.1}>
             <div>
-              <p className="mb-1 text-sm font-bold text-vault-ink">{copy.coverageReport.chartTitle}</p>
-              <p className="mb-4 text-xs text-vault-muted">{copy.coverageReport.chartRangeNote}</p>
+              <p className="mb-4 text-sm font-bold text-vault-ink">{copy.coverageReport.chartTitle}</p>
               <div className="h-56 w-full" dir="ltr">
                 {numericHidden ? (
                   <div className="flex h-full items-center justify-center text-center text-sm text-vault-muted">
@@ -150,11 +151,16 @@ export function CoverageReport({ policy }: { policy: CoverageDisclosurePolicy })
             <summary className="cursor-pointer text-sm font-bold text-vault-ink focus-visible:outline-none">
               {copy.coverageReport.howCalculated.title}
             </summary>
-            <ol className="mt-4 flex flex-col gap-2 text-sm leading-7 text-vault-muted">
-              {copy.coverageReport.howCalculated.steps.map((step) => (
-                <li key={step}>· {step}</li>
+            <div className="mt-4 flex flex-col gap-4 text-sm leading-7 text-vault-muted">
+              {copy.coverageReport.howCalculated.sections.map((section) => (
+                <div key={section.heading}>
+                  <p className="font-bold text-vault-ink">{section.heading}</p>
+                  {section.items.map((item) => (
+                    <p key={item}>{item}</p>
+                  ))}
+                </div>
               ))}
-            </ol>
+            </div>
           </details>
         </Reveal>
       </div>

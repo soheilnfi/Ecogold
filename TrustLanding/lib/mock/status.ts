@@ -28,11 +28,11 @@ const DAY_MS = 24 * 60 * 60_000;
 
 const SERVICE_DEFS = [
   { key: "trade", label: "خرید و فروش" },
-  { key: "depositToman", label: "واریز تومان" },
-  { key: "withdrawToman", label: "برداشت تومان" },
+  { key: "depositToman", label: "واریز ریالی" },
+  { key: "withdrawToman", label: "برداشت ریالی" },
   { key: "physicalDelivery", label: "دریافت فیزیکی" },
   { key: "livePrice", label: "قیمت لحظه‌ای" },
-  { key: "support", label: "تماس و پشتیبانی" },
+  { key: "support", label: "پشتیبانی" },
   { key: "vip", label: "خرید VIP" },
   { key: "instantCredit", label: "اعتبار فوری" },
 ] as const;

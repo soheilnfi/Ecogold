@@ -5,7 +5,6 @@ import Image from "next/image";
 import { copy } from "@/content/copy.fa";
 import { useLiveData } from "@/lib/hooks/useLiveData";
 import { formatJalaliDate } from "@/lib/jalali";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Modal } from "@/components/ui/Modal";
 import { Button } from "@/components/ui/Button";
@@ -59,8 +58,7 @@ export function Licenses() {
         <Reveal>
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <Eyebrow>{copy.licenses.eyebrow}</Eyebrow>
-              <h2 className="mt-3 text-h2 font-black text-ink-900">{copy.licenses.title}</h2>
+              <h2 className="text-h2 font-black text-ink-900">{copy.licenses.title}</h2>
               <p className="mt-3 max-w-xl text-sm leading-7 text-muted">{copy.licenses.subtitle}</p>
             </div>
             <Button variant="ghost" size="md" onClick={() => setReceiptsOpen(true)}>

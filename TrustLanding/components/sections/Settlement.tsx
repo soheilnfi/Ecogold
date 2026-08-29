@@ -15,7 +15,6 @@ export function Settlement() {
           <Reveal>
             <Eyebrow>{t.eyebrow}</Eyebrow>
             <h2 className="mt-3 text-h2 font-black text-ink-900">{t.title}</h2>
-            <p className="mt-3 max-w-xl text-sm leading-7 text-muted">{t.subtitle}</p>
 
             <ul className="mt-10 flex flex-col gap-6">
               {t.slaRows.map((row) => (

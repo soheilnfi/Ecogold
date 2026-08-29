@@ -31,6 +31,7 @@ export function PhysicalDelivery() {
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <Chip tone="neutral">{t.chips.minGrams}</Chip>
             <Chip tone="neutral">{t.chips.feeFrom}</Chip>
+            <Chip tone="neutral">{t.chips.shippingFee}</Chip>
             <Chip tone="neutral">{t.chips.timing}</Chip>
           </div>
         </Reveal>

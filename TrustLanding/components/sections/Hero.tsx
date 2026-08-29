@@ -20,6 +20,7 @@ export function Hero() {
               {copy.hero.ctaSecondary}
             </Button>
           </div>
+          <p className="mt-3 text-xs text-ink-500">{copy.hero.ctaPrimaryNote}</p>
         </div>
 
         <div className="aspect-square w-full max-w-md rounded-card border border-dashed border-line bg-surface-2 sm:aspect-[4/5]" />

@@ -64,6 +64,7 @@ export function DeliveryCenter() {
             <p className="mt-2 text-sm text-vault-muted">{b.hoursWeekdays}</p>
             <p className="text-sm text-vault-muted">{b.hoursThursday}</p>
             <p className="text-sm text-vault-muted">{b.closedFriday}</p>
+            <p className="mt-4 text-xs text-vault-muted">{t.appointmentNote}</p>
 
             <div className="mt-6 flex flex-wrap gap-3">
               <Button
