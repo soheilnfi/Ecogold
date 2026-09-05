@@ -7,6 +7,7 @@ import { CoverageReport } from "@/components/sections/CoverageReport";
 import { Licenses } from "@/components/sections/Licenses";
 import { PriceTransparency } from "@/components/sections/PriceTransparency";
 import { Settlement } from "@/components/sections/Settlement";
+import { Products } from "@/components/sections/Products";
 import { PhysicalDelivery } from "@/components/sections/PhysicalDelivery";
 import { DeliveryCenter } from "@/components/sections/DeliveryCenter";
 import { Faq } from "@/components/sections/Faq";
@@ -33,6 +34,7 @@ export default function Home() {
         <Licenses />
         <PriceTransparency />
         <Settlement />
+        <Products />
         <PhysicalDelivery />
         <DeliveryCenter />
         <Faq />

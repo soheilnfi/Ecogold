@@ -61,7 +61,7 @@ export function Licenses() {
               <h2 className="text-h2 font-black text-ink-900">{copy.licenses.title}</h2>
               <p className="mt-3 max-w-xl text-sm leading-7 text-muted">{copy.licenses.subtitle}</p>
             </div>
-            <Button variant="ghost" size="md" onClick={() => setReceiptsOpen(true)}>
+            <Button variant="primary" size="md" onClick={() => setReceiptsOpen(true)}>
               {copy.licenses.bankDepositCta}
             </Button>
           </div>

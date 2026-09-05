@@ -281,6 +281,27 @@ export const copy = {
     },
   },
 
+  products: {
+    eyebrow: "محصولات",
+    title: "برخی از محصولات",
+    subtitle: "نمونه‌ای از قطعات طلای آبشدهٔ عیار ۷۵۰ که می‌توانید به‌صورت فیزیکی تحویل بگیرید.",
+    purityLabel: "عیار",
+    weightLabel: "وزن",
+    deliveryFeeLabel: "کارمزد تحویل",
+    items: [
+      { key: "gold-0-5g", weightGrams: 0.5, purity: 750, deliveryFeePercent: 3, imageUrl: null },
+      { key: "gold-1g", weightGrams: 1, purity: 750, deliveryFeePercent: 2.5, imageUrl: null },
+      { key: "gold-2g", weightGrams: 2, purity: 750, deliveryFeePercent: 2, imageUrl: null },
+      { key: "gold-3g", weightGrams: 3, purity: 750, deliveryFeePercent: 1.8, imageUrl: null },
+      { key: "gold-5g", weightGrams: 5, purity: 750, deliveryFeePercent: 1.5, imageUrl: null },
+      { key: "gold-10g", weightGrams: 10, purity: 750, deliveryFeePercent: 1.2, imageUrl: null },
+      { key: "gold-20g", weightGrams: 20, purity: 750, deliveryFeePercent: 1, imageUrl: null },
+      { key: "gold-30g", weightGrams: 30, purity: 750, deliveryFeePercent: 0.9, imageUrl: null },
+      { key: "gold-50g", weightGrams: 50, purity: 750, deliveryFeePercent: 0.8, imageUrl: null },
+      { key: "gold-100g", weightGrams: 100, purity: 750, deliveryFeePercent: 0.7, imageUrl: null },
+    ],
+  },
+
   physicalDelivery: {
     eyebrow: "تحویل فیزیکی دارایی",
     title: "طلای خود را فیزیکی تحویل بگیرید",
