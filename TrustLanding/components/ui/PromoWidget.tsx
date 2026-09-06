@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { copy } from "@/content/copy.fa";
 import { Button } from "@/components/ui/Button";
@@ -38,8 +39,14 @@ export function PromoWidget() {
             ×
           </button>
 
-          <div className="relative aspect-[4/3] border-b border-line bg-surface-2">
-            <div className="absolute inset-2 rounded-md border border-dashed border-line" />
+          <div className="relative aspect-square border-b border-line bg-surface-2">
+            <Image
+              src="/images/promo/floating-widget.jpg"
+              alt={t.title}
+              fill
+              sizes="288px"
+              className="object-cover"
+            />
           </div>
 
           <div className="p-4">
