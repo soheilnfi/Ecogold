@@ -1,53 +1,73 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { formatDuration } from "@/lib/format";
 import { cn } from "@/lib/cn";
 
 /**
- * ویجت پخش ویس نظرات — بدون فایل صوتی واقعی (این نظرات نمونه‌اند)، فقط
- * تجربهٔ تعاملی «پخش/توقف + نوار پیشرفت» را شبیه‌سازی می‌کند، دقیقاً مثل
- * تایم‌لاین شبیه‌سازی‌شدهٔ ویجت تست دریافت وجه.
+ * ویجت پخش ویس نظرات — فایل صوتی واقعی را فقط با کلیک روی پخش بارگذاری
+ * می‌کند (preload="none")، نه از قبل.
  */
 export function VoicePlayer({
+  src,
   durationSeconds,
   playing,
   onPlayToggle,
   className,
 }: {
+  src: string;
   durationSeconds: number;
   playing: boolean;
   onPlayToggle: () => void;
   className?: string;
 }) {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [elapsed, setElapsed] = useState(0);
+  const [duration, setDuration] = useState(durationSeconds);
 
   useEffect(() => {
-    if (!playing) return;
-
-    const start = Date.now() - elapsed * 1000;
-    const timer = setInterval(() => {
-      const next = (Date.now() - start) / 1000;
-      if (next >= durationSeconds) {
-        setElapsed(0);
-        onPlayToggle();
-        return;
-      }
-      setElapsed(next);
-    }, 200);
-
-    return () => clearInterval(timer);
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (playing) {
+      audio.play().catch(() => onPlayToggle());
+    } else {
+      audio.pause();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playing]);
 
   useEffect(() => {
-    if (!playing) setElapsed(0);
-  }, [playing]);
+    const audio = audioRef.current;
+    if (!audio) return;
 
-  const progress = durationSeconds > 0 ? Math.min(1, elapsed / durationSeconds) : 0;
+    function onTimeUpdate() {
+      setElapsed(audio!.currentTime);
+    }
+    function onLoadedMetadata() {
+      if (Number.isFinite(audio!.duration)) setDuration(audio!.duration);
+    }
+    function onEnded() {
+      setElapsed(0);
+      onPlayToggle();
+    }
+
+    audio.addEventListener("timeupdate", onTimeUpdate);
+    audio.addEventListener("loadedmetadata", onLoadedMetadata);
+    audio.addEventListener("ended", onEnded);
+    return () => {
+      audio.removeEventListener("timeupdate", onTimeUpdate);
+      audio.removeEventListener("loadedmetadata", onLoadedMetadata);
+      audio.removeEventListener("ended", onEnded);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const progress = duration > 0 ? Math.min(1, elapsed / duration) : 0;
 
   return (
     <div className={cn("flex items-center gap-3", className)}>
+      <audio ref={audioRef} src={src} preload="none" />
+
       <button
         type="button"
         onClick={onPlayToggle}
@@ -74,7 +94,7 @@ export function VoicePlayer({
       </div>
 
       <span className="shrink-0 text-xs tabular-nums text-muted">
-        {formatDuration(playing ? elapsed : 0)} / {formatDuration(durationSeconds)}
+        {formatDuration(elapsed)} / {formatDuration(duration)}
       </span>
     </div>
   );

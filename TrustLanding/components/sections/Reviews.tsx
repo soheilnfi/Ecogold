@@ -8,7 +8,6 @@ import { formatJalaliDate } from "@/lib/jalali";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Card } from "@/components/ui/Card";
-import { Chip } from "@/components/ui/Chip";
 import { Modal } from "@/components/ui/Modal";
 import { VoicePlayer } from "@/components/ui/VoicePlayer";
 import type { ReviewsResponse } from "@/lib/mock/reviews";
@@ -23,7 +22,7 @@ function Stars({ rating }: { rating: number }) {
 }
 
 export function Reviews() {
-  const { data, fetchFailed, loading } = useLiveData<ReviewsResponse>("/api/reviews?limit=12");
+  const { data, fetchFailed, loading } = useLiveData<ReviewsResponse>("/api/reviews?limit=8");
   const [modalOpen, setModalOpen] = useState(false);
   const [playingId, setPlayingId] = useState<string | null>(null);
   const t = copy.reviews;
@@ -72,19 +71,19 @@ export function Reviews() {
               {data.items.map((review, idx) => (
                 <Reveal key={review.id} delay={idx * 0.05}>
                   <Card className="flex h-full flex-col">
-                    <div className="flex items-center justify-between gap-2">
-                      <Stars rating={review.rating} />
-                      {review.verified && <Chip tone="ok">{t.verifiedBadge}</Chip>}
-                    </div>
-                    <p className="mt-3 flex-1 text-sm leading-7 text-ink-700">{review.text}</p>
                     <VoicePlayer
+                      src={review.voiceUrl}
                       durationSeconds={review.voiceDurationSeconds}
                       playing={playingId === review.id}
                       onPlayToggle={() =>
                         setPlayingId((current) => (current === review.id ? null : review.id))
                       }
-                      className="mt-4"
                     />
+                    <div className="mt-4 flex-1 rounded-md border border-line bg-surface-2 p-4">
+                      <p className="text-xs font-bold text-ink-900">{t.replyLabel}</p>
+                      <p className="mt-1 text-xs leading-6 text-muted">{t.replyPlaceholder}</p>
+                    </div>
+
                     <div className="mt-4 flex items-center justify-between text-xs text-muted">
                       <span>{review.name}</span>
                       <span>{formatJalaliDate(review.date)}</span>

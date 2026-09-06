@@ -374,8 +374,9 @@ export const copy = {
   reviews: {
     eyebrow: "تجربهٔ کاربران",
     title: "چیزی که کاربران واقعی می‌گویند",
-    verifiedBadge: "کاربر تأییدشده",
     totalSuffix: "نظر",
+    replyLabel: "پاسخ اکوگلد",
+    replyPlaceholder: "پاسخ اکوگلد به این نظر به‌زودی اضافه می‌شود.",
     antiFraudLink: "چطور از جعل نظر جلوگیری می‌کنیم؟",
     antiFraudModal: {
       title: "چطور از جعل نظر جلوگیری می‌کنیم؟",
