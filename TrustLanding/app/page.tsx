@@ -11,8 +11,8 @@ import { MidBanner } from "@/components/sections/MidBanner";
 import { Products } from "@/components/sections/Products";
 import { PhysicalDelivery } from "@/components/sections/PhysicalDelivery";
 import { DeliveryCenter } from "@/components/sections/DeliveryCenter";
-import { Faq } from "@/components/sections/Faq";
 import { Reviews } from "@/components/sections/Reviews";
+import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { PromoWidget } from "@/components/ui/PromoWidget";
 import { getCoverageDisclosurePolicy } from "@/lib/coverage-disclosure";
@@ -39,8 +39,8 @@ export default function Home() {
         <Products />
         <PhysicalDelivery />
         <DeliveryCenter />
-        <Faq />
         <Reviews />
+        <Faq />
         <FinalCta />
       </main>
       <SiteFooter />

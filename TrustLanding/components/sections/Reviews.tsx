@@ -3,27 +3,15 @@
 import { useState } from "react";
 import { copy } from "@/content/copy.fa";
 import { useLiveData } from "@/lib/hooks/useLiveData";
-import { formatCount, formatDecimal } from "@/lib/format";
 import { formatJalaliDate } from "@/lib/jalali";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Card } from "@/components/ui/Card";
-import { Modal } from "@/components/ui/Modal";
 import { VoicePlayer } from "@/components/ui/VoicePlayer";
 import type { ReviewsResponse } from "@/lib/mock/reviews";
 
-function Stars({ rating }: { rating: number }) {
-  return (
-    <span className="text-gold-dim" aria-hidden="true">
-      {"★".repeat(rating)}
-      <span className="text-line">{"★".repeat(5 - rating)}</span>
-    </span>
-  );
-}
-
 export function Reviews() {
   const { data, fetchFailed, loading } = useLiveData<ReviewsResponse>("/api/reviews?limit=8");
-  const [modalOpen, setModalOpen] = useState(false);
   const [playingId, setPlayingId] = useState<string | null>(null);
   const t = copy.reviews;
 
@@ -48,57 +36,33 @@ export function Reviews() {
             {t.unavailable}
           </p>
         ) : (
-          <>
-            <Reveal delay={0.05}>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <Stars rating={Math.round(data.average)} />
-                <span className="text-sm font-bold tabular-nums text-ink-900">
-                  {formatDecimal(data.average)}
-                </span>
-                <span className="text-sm text-muted">
-                  · {formatCount(data.total)} {t.totalSuffix}
-                </span>
-                <button
-                  onClick={() => setModalOpen(true)}
-                  className="text-xs font-bold text-info hover:underline"
-                >
-                  {t.antiFraudLink}
-                </button>
-              </div>
-            </Reveal>
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {data.items.map((review, idx) => (
+              <Reveal key={review.id} delay={idx * 0.05}>
+                <Card className="flex h-full flex-col">
+                  <VoicePlayer
+                    src={review.voiceUrl}
+                    durationSeconds={review.voiceDurationSeconds}
+                    playing={playingId === review.id}
+                    onPlayToggle={() =>
+                      setPlayingId((current) => (current === review.id ? null : review.id))
+                    }
+                  />
+                  <div className="mt-4 flex-1 rounded-md border border-line bg-surface-2 p-4">
+                    <p className="text-xs font-bold text-ink-900">{t.replyLabel}</p>
+                    <p className="mt-1 text-xs leading-6 text-muted">{t.replyPlaceholder}</p>
+                  </div>
 
-            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {data.items.map((review, idx) => (
-                <Reveal key={review.id} delay={idx * 0.05}>
-                  <Card className="flex h-full flex-col">
-                    <VoicePlayer
-                      src={review.voiceUrl}
-                      durationSeconds={review.voiceDurationSeconds}
-                      playing={playingId === review.id}
-                      onPlayToggle={() =>
-                        setPlayingId((current) => (current === review.id ? null : review.id))
-                      }
-                    />
-                    <div className="mt-4 flex-1 rounded-md border border-line bg-surface-2 p-4">
-                      <p className="text-xs font-bold text-ink-900">{t.replyLabel}</p>
-                      <p className="mt-1 text-xs leading-6 text-muted">{t.replyPlaceholder}</p>
-                    </div>
-
-                    <div className="mt-4 flex items-center justify-between text-xs text-muted">
-                      <span>{review.name}</span>
-                      <span>{formatJalaliDate(review.date)}</span>
-                    </div>
-                  </Card>
-                </Reveal>
-              ))}
-            </div>
-          </>
+                  <div className="mt-4 flex items-center justify-between text-xs text-muted">
+                    <span>{review.name}</span>
+                    <span>{formatJalaliDate(review.date)}</span>
+                  </div>
+                </Card>
+              </Reveal>
+            ))}
+          </div>
         )}
       </div>
-
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={t.antiFraudModal.title}>
-        <p className="text-sm leading-8 text-ink-700">{t.antiFraudModal.body}</p>
-      </Modal>
     </section>
   );
 }
