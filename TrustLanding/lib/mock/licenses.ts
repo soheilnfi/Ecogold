@@ -59,6 +59,15 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       logoUrl: "/images/licenses/license-coin.jpg",
     },
     {
+      key: "gold-retail",
+      title: "پروانه کسب فروشندگی طلا",
+      number: "1404943329",
+      issuer: "اتحادیهٔ صنف فروشندگان و سازندگان طلا، جواهر، نقره، سکه و صراف تهران",
+      validUntil: "2031-02-22",
+      verifyUrl: "https://iranasnaf.ir",
+      logoUrl: "/images/licenses/gold-retail-license.jpg",
+    },
+    {
       key: "chamber-of-commerce",
       title: "عضویت در اتاق بازرگانی",
       number: "CoC-773301",
