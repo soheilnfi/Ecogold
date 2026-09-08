@@ -6,7 +6,6 @@ export interface LicenseItem {
   number: string;
   issuer: string;
   validUntil: string;
-  verifyUrl: string;
   logoUrl: string | null;
 }
 
@@ -28,7 +27,6 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       number: "VB-170580",
       issuer: "اتحادیهٔ صنف کسب‌وکارهای مجازی کشوری",
       validUntil: "2027-02-04",
-      verifyUrl: "https://iranasnaf.ir",
       logoUrl: "/images/licenses/license-gold-silver.jpg",
     },
     {
@@ -37,7 +35,6 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       number: "GJ-31185",
       issuer: "اتحادیهٔ صنف فروشندگان و سازندگان طلا، جواهر، نقره، سکه و صراف تهران",
       validUntil: "2027-04-24",
-      verifyUrl: "https://iranasnaf.ir",
       logoUrl: "/images/licenses/license-gold.jpg",
     },
     {
@@ -46,7 +43,6 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       number: "GJ-31186",
       issuer: "اتحادیهٔ صنف فروشندگان و سازندگان طلا، جواهر، نقره، سکه و صراف تهران",
       validUntil: "2027-04-24",
-      verifyUrl: "https://iranasnaf.ir",
       logoUrl: "/images/licenses/license-silver.jpg",
     },
     {
@@ -55,7 +51,6 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       number: "GJ-31187",
       issuer: "اتحادیهٔ صنف فروشندگان و سازندگان طلا، جواهر، نقره، سکه و صراف تهران",
       validUntil: "2027-04-24",
-      verifyUrl: "https://iranasnaf.ir",
       logoUrl: "/images/licenses/license-coin.jpg",
     },
     {
@@ -64,7 +59,6 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       number: "1404943329",
       issuer: "اتحادیهٔ صنف فروشندگان و سازندگان طلا، جواهر، نقره، سکه و صراف تهران",
       validUntil: "2031-02-22",
-      verifyUrl: "https://iranasnaf.ir",
       logoUrl: "/images/licenses/gold-retail-license.jpg",
     },
     {
@@ -73,7 +67,6 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       number: "CoC-773301",
       issuer: "اتاق بازرگانی، صنایع، معادن و کشاورزی تهران",
       validUntil: "2027-05-09",
-      verifyUrl: "https://tccim.ir",
       logoUrl: "/images/licenses/chamber-of-commerce.jpg",
     },
     {
@@ -82,7 +75,6 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       number: "SEC-40821",
       issuer: "تیم متخصص امنیت سایبری",
       validUntil: "2026-12-01",
-      verifyUrl: "https://ecogold.ir/bug-bounty",
       logoUrl: "/images/licenses/cyber-security.jpg",
     },
     {
@@ -91,7 +83,6 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       number: "FT-1044",
       issuer: "انجمن صنفی کارفرمایی فناوری‌های نوین مالی (فین‌تک)",
       validUntil: "2026-11-30",
-      verifyUrl: "https://ifta.ir",
       logoUrl: "/images/licenses/fintech-association.jpg",
     },
     {
@@ -100,7 +91,6 @@ export function buildLicensesResponse(scenario: MockScenario, now: number): Lice
       number: "NSR-56210",
       issuer: "سازمان نظام صنفی رایانه‌ای استان تهران",
       validUntil: "2027-02-15",
-      verifyUrl: "https://tehran.irannsr.org",
       logoUrl: "/images/licenses/computer-guild.jpg",
     },
   ];

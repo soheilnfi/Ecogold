@@ -8,7 +8,6 @@ import { formatJalaliDate } from "@/lib/jalali";
 import { Reveal } from "@/components/ui/Reveal";
 import { Modal } from "@/components/ui/Modal";
 import { Button } from "@/components/ui/Button";
-import { ExternalLinkArrow } from "@/components/ui/ExternalLinkArrow";
 import { ReceiptSlider } from "@/components/ui/ReceiptSlider";
 import type { LicenseItem, LicensesResponse } from "@/lib/mock/licenses";
 
@@ -130,17 +129,6 @@ export function Licenses() {
                 />
               )}
             </div>
-            {openItem.verifyUrl && (
-              <a
-                href={openItem.verifyUrl}
-                target="_blank"
-                rel="noopener"
-                className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-info hover:underline"
-              >
-                {copy.licenses.verifyLink}
-                <ExternalLinkArrow className="size-3" />
-              </a>
-            )}
           </>
         )}
       </Modal>
