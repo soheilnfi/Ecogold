@@ -8,6 +8,7 @@ import { formatRelativeFromNow } from "@/lib/jalali";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { UptimeStrip } from "@/components/data/UptimeStrip";
+import { LimitedMarketStatus } from "@/components/data/LimitedMarketStatus";
 import { cn } from "@/lib/cn";
 import type { StatusResponse, ServiceState } from "@/lib/mock/status";
 
@@ -85,12 +86,17 @@ export function ServiceStatus() {
                     <p className="mt-3 text-xs text-muted">
                       {formatPercent(service.uptime30d, 2)} در ۳۰ روز گذشته
                     </p>
+                    {service.sla && (
+                      <p className="mt-1 text-xs font-bold text-ink-700">{service.sla}</p>
+                    )}
                   </div>
                 </Reveal>
               );
             })}
           </div>
         )}
+
+        {!unavailable && <LimitedMarketStatus />}
 
         {!unavailable && data && (
           <p className="mt-6 text-xs text-muted">

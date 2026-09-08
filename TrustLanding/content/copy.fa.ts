@@ -98,6 +98,30 @@ export const copy = {
         : `${date} · ${uptime}`,
   },
 
+  limitedMarkets: {
+    title: "بازار نقره و سکه",
+    subtitle: "برخلاف طلا، معاملهٔ نقره و سکه فقط در ساعات معاملاتی مشخص انجام می‌شود.",
+    openNow: "الان باز است",
+    closedNow: "الان بسته است",
+    hoursLabel: "ساعت معاملاتی",
+    tabs: [
+      {
+        key: "silver",
+        label: "بازار نقره",
+        hoursText: "۹:۰۰ الی ۱۷:۰۰",
+        openHour: 9,
+        closeHour: 17,
+      },
+      {
+        key: "coin",
+        label: "بازار سکه",
+        hoursText: "۹:۰۰ الی ۱۷:۰۰",
+        openHour: 9,
+        closeHour: 17,
+      },
+    ],
+  },
+
   coverageReport: {
     title: "گزارش پوشش دارایی‌ها",
     subtitle: "نسبت دارایی فیزیکی تأمین‌شده به تعهد اکوگلد در برابر کاربران",

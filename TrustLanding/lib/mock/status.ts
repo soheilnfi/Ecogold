@@ -12,6 +12,7 @@ export interface ServiceDay {
 export interface ServiceEntry {
   key: string;
   label: string;
+  sla: string | null;
   state: ServiceState;
   uptime30d: number;
   days: ServiceDay[];
@@ -27,14 +28,14 @@ export interface StatusResponse {
 const DAY_MS = 24 * 60 * 60_000;
 
 const SERVICE_DEFS = [
-  { key: "trade", label: "خرید و فروش" },
-  { key: "depositToman", label: "واریز ریالی" },
-  { key: "withdrawToman", label: "برداشت ریالی" },
-  { key: "physicalDelivery", label: "دریافت فیزیکی" },
-  { key: "livePrice", label: "قیمت لحظه‌ای" },
-  { key: "support", label: "پشتیبانی" },
-  { key: "vip", label: "خرید VIP" },
-  { key: "instantCredit", label: "اعتبار فوری" },
+  { key: "trade", label: "خرید و فروش", sla: "معاملهٔ طلا باید همیشه (۲۴/۷) در دسترس باشد" },
+  { key: "depositToman", label: "واریز ریالی", sla: "SLA: حداکثر ۲۴ ساعت" },
+  { key: "withdrawToman", label: "برداشت ریالی", sla: "SLA: حداکثر ۷۲ ساعت" },
+  { key: "physicalDelivery", label: "دریافت فیزیکی", sla: null },
+  { key: "livePrice", label: "قیمت لحظه‌ای", sla: null },
+  { key: "support", label: "پشتیبانی", sla: null },
+  { key: "vip", label: "خرید VIP", sla: null },
+  { key: "instantCredit", label: "اعتبار فوری", sla: null },
 ] as const;
 
 // دو سرویس عمداً وضعیت غیرکامل دارند تا حالت‌های واقعی صفحهٔ وضعیت دیده شود
@@ -77,7 +78,7 @@ export function buildStatusResponse(scenario: MockScenario, now: number): Status
   const asOfMs = scenario === "stale" ? now - 45 * 60_000 : now - 90_000;
   const asOf = new Date(asOfMs).toISOString();
 
-  const services: ServiceEntry[] = SERVICE_DEFS.map(({ key, label }) => {
+  const services: ServiceEntry[] = SERVICE_DEFS.map(({ key, label, sla }) => {
     const forcedState: ServiceState = DOWN_KEYS.has(key)
       ? "down"
       : DEGRADED_KEYS.has(key)
@@ -87,6 +88,7 @@ export function buildStatusResponse(scenario: MockScenario, now: number): Status
     return {
       key,
       label,
+      sla,
       state: forcedState,
       uptime30d: average(days.map((d) => d.uptime)),
       days,
