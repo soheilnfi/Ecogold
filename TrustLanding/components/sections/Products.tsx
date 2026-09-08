@@ -26,13 +26,7 @@ function ProductCard({
   return (
     <div className="flex h-full flex-col items-start gap-2 rounded-card border border-line bg-surface p-4">
       <div className="relative h-16 w-full shrink-0 overflow-hidden rounded-md bg-surface-2">
-        <Image
-          src={imageUrl}
-          alt={alt}
-          fill
-          sizes="40px"
-          className="object-contain object-bottom p-2"
-        />
+        <Image src={imageUrl} alt={alt} fill sizes="40px" className="object-contain object-bottom px-2" />
       </div>
       <p className="text-sm font-bold text-ink-900">{brand}</p>
       <div className="flex flex-col gap-1">{children}</div>
