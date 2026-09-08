@@ -104,6 +104,13 @@ export const copy = {
     hoursLabel: "ساعت معاملاتی",
     tabs: [
       {
+        key: "gold",
+        label: "بازار طلا",
+        hoursText: "۹:۰۰ الی ۱۷:۰۰",
+        openHour: 9,
+        closeHour: 17,
+      },
+      {
         key: "silver",
         label: "بازار نقره",
         hoursText: "۹:۰۰ الی ۱۷:۰۰",

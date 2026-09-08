@@ -63,50 +63,55 @@ export function ServiceStatus() {
             {copy.serviceStatus.unavailableMessage}
           </div>
         ) : (
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {data.services.map((service, idx) => {
-              const style = STATE_STYLE[service.state];
-              const tier = uptimeTier(service.uptime30d);
-              return (
-                <Reveal key={service.key} delay={idx * 0.03}>
-                  <div className="rounded-card border border-line bg-surface p-5">
-                    <div className="flex items-center justify-between gap-2">
-                      <p className="text-sm font-bold text-ink-900">{service.label}</p>
-                      <span
-                        className={cn(
-                          "flex items-center gap-1.5 text-xs font-bold",
-                          service.state === "operational"
-                            ? "text-ok"
-                            : service.state === "degraded"
-                              ? "text-warn"
-                              : "text-down"
-                        )}
-                      >
-                        <span aria-hidden="true" className={cn("inline-block shrink-0", style)} />
-                        {copy.serviceStatus.stateLabels[service.state]}
-                      </span>
-                    </div>
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:col-span-2 sm:grid-cols-2">
+              {data.services.map((service, idx) => {
+                const style = STATE_STYLE[service.state];
+                const tier = uptimeTier(service.uptime30d);
+                return (
+                  <Reveal key={service.key} delay={idx * 0.03}>
+                    <div className="rounded-card border border-line bg-surface p-5">
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-sm font-bold text-ink-900">{service.label}</p>
+                        <span
+                          className={cn(
+                            "flex items-center gap-1.5 text-xs font-bold",
+                            service.state === "operational"
+                              ? "text-ok"
+                              : service.state === "degraded"
+                                ? "text-warn"
+                                : "text-down"
+                          )}
+                        >
+                          <span aria-hidden="true" className={cn("inline-block shrink-0", style)} />
+                          {copy.serviceStatus.stateLabels[service.state]}
+                        </span>
+                      </div>
 
-                    <div className="mt-4">
-                      <UptimeStrip days={service.days} />
-                    </div>
+                      <div className="mt-4">
+                        <UptimeStrip days={service.days} />
+                      </div>
 
-                    <p className={cn("mt-3 text-2xl font-black tabular-nums", tier.text)}>
-                      {formatPercent(service.uptime30d, 2)}
-                    </p>
-                    <p className="mt-0.5 text-xs text-muted">در ۳۰ روز گذشته</p>
-                    {service.sla && (
-                      <p className="mt-1 text-xs font-bold text-ink-700">{service.sla}</p>
-                    )}
-                  </div>
+                      <p className={cn("mt-3 text-2xl font-black tabular-nums", tier.text)}>
+                        {formatPercent(service.uptime30d, 2)}
+                      </p>
+                      <p className="mt-0.5 text-xs text-muted">در ۳۰ روز گذشته</p>
+                      {service.sla && (
+                        <p className="mt-1 text-xs font-bold text-ink-700">{service.sla}</p>
+                      )}
+                    </div>
+                  </Reveal>
+                );
+              })}
+            </div>
+
+            <div className="flex flex-col gap-4 sm:col-span-2">
+              {copy.limitedMarkets.tabs.map((market, idx) => (
+                <Reveal key={market.key} delay={(data.services.length + idx) * 0.03}>
+                  <MarketStatusCard market={market} />
                 </Reveal>
-              );
-            })}
-            {copy.limitedMarkets.tabs.map((market, idx) => (
-              <Reveal key={market.key} delay={(data.services.length + idx) * 0.03}>
-                <MarketStatusCard market={market} />
-              </Reveal>
-            ))}
+              ))}
+            </div>
           </div>
         )}
 
