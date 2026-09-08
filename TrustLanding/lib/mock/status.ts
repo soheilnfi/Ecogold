@@ -28,15 +28,12 @@ export interface StatusResponse {
 const DAY_MS = 24 * 60 * 60_000;
 
 const SERVICE_DEFS = [
-  { key: "trade", label: "خرید و فروش", sla: "معاملهٔ طلا باید همیشه (۲۴/۷) در دسترس باشد" },
+  { key: "trade", label: "خرید و فروش", sla: "SLA: دسترس‌پذیری ۲۴/۷" },
   { key: "depositToman", label: "واریز ریالی", sla: "SLA: حداکثر ۲۴ ساعت" },
   { key: "withdrawToman", label: "برداشت ریالی", sla: "SLA: حداکثر ۷۲ ساعت" },
-  { key: "physicalDelivery", label: "دریافت فیزیکی", sla: null },
-  { key: "livePrice", label: "قیمت لحظه‌ای", sla: null },
 ] as const;
 
-// دو سرویس عمداً وضعیت غیرکامل دارند تا حالت‌های واقعی صفحهٔ وضعیت دیده شود
-const DEGRADED_KEYS = new Set(["support"]);
+const DEGRADED_KEYS = new Set<string>([]);
 const DOWN_KEYS = new Set<string>([]);
 
 function buildDays(now: number, key: string, forcedState: ServiceState): ServiceDay[] {

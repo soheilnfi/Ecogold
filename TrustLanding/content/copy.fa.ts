@@ -99,8 +99,6 @@ export const copy = {
   },
 
   limitedMarkets: {
-    title: "بازار نقره و سکه",
-    subtitle: "برخلاف طلا، معاملهٔ نقره و سکه فقط در ساعات معاملاتی مشخص انجام می‌شود.",
     openNow: "الان باز است",
     closedNow: "الان بسته است",
     hoursLabel: "ساعت معاملاتی",

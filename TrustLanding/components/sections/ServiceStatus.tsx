@@ -8,7 +8,7 @@ import { formatRelativeFromNow } from "@/lib/jalali";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { UptimeStrip } from "@/components/data/UptimeStrip";
-import { LimitedMarketStatus } from "@/components/data/LimitedMarketStatus";
+import { MarketStatusCard } from "@/components/data/MarketStatusCard";
 import { cn } from "@/lib/cn";
 import type { StatusResponse, ServiceState } from "@/lib/mock/status";
 
@@ -22,6 +22,13 @@ const STATE_STYLE: Record<ServiceState, string> = {
   degraded: "size-0 border-x-[5px] border-b-[8px] border-x-transparent border-b-warn",
   down: "size-2 rounded-[1px] bg-down",
 };
+
+/** رنگ‌بندی کارت بر اساس درصد دسترس‌پذیری ۳۰ روزه: ≥۹۰ سبز، ۸۰ تا ۹۰ زرد، زیر ۸۰ قرمز */
+function uptimeTier(uptime: number): { bg: string; text: string } {
+  if (uptime >= 90) return { bg: "bg-ok-bg", text: "text-ok" };
+  if (uptime >= 80) return { bg: "bg-warn-bg", text: "text-warn" };
+  return { bg: "bg-down-bg", text: "text-down" };
+}
 
 export function ServiceStatus() {
   const { data, fetchFailed, loading } = useLiveData<StatusResponse>("/api/status", {
@@ -59,6 +66,7 @@ export function ServiceStatus() {
           <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {data.services.map((service, idx) => {
               const style = STATE_STYLE[service.state];
+              const tier = uptimeTier(service.uptime30d);
               return (
                 <Reveal key={service.key} delay={idx * 0.03}>
                   <div className="rounded-card border border-line bg-surface p-5">
@@ -83,9 +91,10 @@ export function ServiceStatus() {
                       <UptimeStrip days={service.days} />
                     </div>
 
-                    <p className="mt-3 text-xs text-muted">
-                      {formatPercent(service.uptime30d, 2)} در ۳۰ روز گذشته
+                    <p className={cn("mt-3 text-2xl font-black tabular-nums", tier.text)}>
+                      {formatPercent(service.uptime30d, 2)}
                     </p>
+                    <p className="mt-0.5 text-xs text-muted">در ۳۰ روز گذشته</p>
                     {service.sla && (
                       <p className="mt-1 text-xs font-bold text-ink-700">{service.sla}</p>
                     )}
@@ -93,10 +102,13 @@ export function ServiceStatus() {
                 </Reveal>
               );
             })}
+            {copy.limitedMarkets.tabs.map((market, idx) => (
+              <Reveal key={market.key} delay={(data.services.length + idx) * 0.03}>
+                <MarketStatusCard market={market} />
+              </Reveal>
+            ))}
           </div>
         )}
-
-        {!unavailable && <LimitedMarketStatus />}
 
         {!unavailable && data && (
           <p className="mt-6 text-xs text-muted">
