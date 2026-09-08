@@ -33,9 +33,6 @@ const SERVICE_DEFS = [
   { key: "withdrawToman", label: "برداشت ریالی", sla: "SLA: حداکثر ۷۲ ساعت" },
   { key: "physicalDelivery", label: "دریافت فیزیکی", sla: null },
   { key: "livePrice", label: "قیمت لحظه‌ای", sla: null },
-  { key: "support", label: "پشتیبانی", sla: null },
-  { key: "vip", label: "خرید VIP", sla: null },
-  { key: "instantCredit", label: "اعتبار فوری", sla: null },
 ] as const;
 
 // دو سرویس عمداً وضعیت غیرکامل دارند تا حالت‌های واقعی صفحهٔ وضعیت دیده شود

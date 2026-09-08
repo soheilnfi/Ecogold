@@ -2,7 +2,7 @@ import Image from "next/image";
 import { copy } from "@/content/copy.fa";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
-import { formatGrams, formatPercent, toPersianDigits } from "@/lib/format";
+import { formatDecimal, formatPercent, toPersianDigits } from "@/lib/format";
 
 export function Products() {
   const t = copy.products;
@@ -24,7 +24,7 @@ export function Products() {
                   {item.imageUrl ? (
                     <Image
                       src={item.imageUrl}
-                      alt={formatGrams(item.weightGrams)}
+                      alt={`شمش ${item.brand} ${formatDecimal(item.rawWeightGrams, 3)} گرم`}
                       fill
                       sizes="(min-width: 1024px) 200px, 33vw"
                       className="object-cover"
@@ -34,15 +34,21 @@ export function Products() {
                   )}
                 </div>
                 <div className="flex flex-1 flex-col gap-1 p-4">
-                  <p className="text-sm font-bold tabular-nums text-ink-900">
-                    {formatGrams(item.weightGrams)}
+                  <p className="text-sm font-bold text-ink-900">{item.brand}</p>
+                  <p className="text-xs tabular-nums text-muted">
+                    {t.rawWeightLabel}: {formatDecimal(item.rawWeightGrams, 3)} گرم
                   </p>
                   <p className="text-xs tabular-nums text-muted">
                     {t.purityLabel}: {toPersianDigits(item.purity)}
                   </p>
                   <p className="text-xs tabular-nums text-muted">
-                    {t.deliveryFeeLabel}: {formatPercent(item.deliveryFeePercent)}
+                    {t.weight750Label}: {formatDecimal(item.weight750Grams, 3)} گرم
                   </p>
+                  {item.deliveryFeePercent !== null && (
+                    <p className="text-xs tabular-nums text-muted">
+                      {t.deliveryFeeLabel}: {formatPercent(item.deliveryFeePercent, 0)}
+                    </p>
+                  )}
                 </div>
               </div>
             </Reveal>
