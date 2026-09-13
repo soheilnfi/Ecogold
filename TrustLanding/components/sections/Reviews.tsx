@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { copy } from "@/content/copy.fa";
 import { useLiveData } from "@/lib/hooks/useLiveData";
-import { formatJalaliDate } from "@/lib/jalali";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Card } from "@/components/ui/Card";
@@ -48,10 +47,6 @@ export function Reviews() {
                       setPlayingId((current) => (current === review.id ? null : review.id))
                     }
                   />
-                  <div className="mt-4 flex flex-1 items-center justify-between text-xs text-muted">
-                    <span>{review.name}</span>
-                    <span>{formatJalaliDate(review.date)}</span>
-                  </div>
                 </Card>
               </Reveal>
             ))}
