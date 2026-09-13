@@ -409,8 +409,6 @@ export const copy = {
   reviews: {
     eyebrow: "تجربهٔ کاربران",
     title: "چیزی که کاربران واقعی می‌گویند",
-    replyLabel: "پاسخ اکوگلد",
-    replyPlaceholder: "پاسخ اکوگلد به این نظر به‌زودی اضافه می‌شود.",
     unavailable: "نظرات کاربران موقتاً در دسترس نیست.",
   },
 

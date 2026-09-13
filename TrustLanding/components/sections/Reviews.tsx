@@ -48,12 +48,7 @@ export function Reviews() {
                       setPlayingId((current) => (current === review.id ? null : review.id))
                     }
                   />
-                  <div className="mt-4 flex-1 rounded-md border border-line bg-surface-2 p-4">
-                    <p className="text-xs font-bold text-ink-900">{t.replyLabel}</p>
-                    <p className="mt-1 text-xs leading-6 text-muted">{t.replyPlaceholder}</p>
-                  </div>
-
-                  <div className="mt-4 flex items-center justify-between text-xs text-muted">
+                  <div className="mt-4 flex flex-1 items-center justify-between text-xs text-muted">
                     <span>{review.name}</span>
                     <span>{formatJalaliDate(review.date)}</span>
                   </div>

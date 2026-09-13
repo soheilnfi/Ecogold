@@ -7,14 +7,12 @@ import { CoverageReport } from "@/components/sections/CoverageReport";
 import { Licenses } from "@/components/sections/Licenses";
 import { PriceTransparency } from "@/components/sections/PriceTransparency";
 import { Settlement } from "@/components/sections/Settlement";
-import { MidBanner } from "@/components/sections/MidBanner";
 import { Products } from "@/components/sections/Products";
 import { PhysicalDelivery } from "@/components/sections/PhysicalDelivery";
 import { DeliveryCenter } from "@/components/sections/DeliveryCenter";
 import { Reviews } from "@/components/sections/Reviews";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
-import { PromoWidget } from "@/components/ui/PromoWidget";
 import { getCoverageDisclosurePolicy } from "@/lib/coverage-disclosure";
 
 export default function Home() {
@@ -35,7 +33,6 @@ export default function Home() {
         <Licenses />
         <PriceTransparency />
         <Settlement />
-        <MidBanner />
         <Products />
         <PhysicalDelivery />
         <DeliveryCenter />
@@ -44,7 +41,6 @@ export default function Home() {
         <FinalCta />
       </main>
       <SiteFooter />
-      <PromoWidget />
     </>
   );
 }

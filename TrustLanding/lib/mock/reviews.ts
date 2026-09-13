@@ -31,15 +31,6 @@ export function buildReviewsResponse(
 
   const all: ReviewItem[] = [
     {
-      id: "rev-1",
-      name: "علی ر.",
-      rating: 5,
-      date: new Date(now - 3 * DAY_MS).toISOString(),
-      verified: true,
-      voiceUrl: "/audio/reviews/01.mp3",
-      voiceDurationSeconds: 98,
-    },
-    {
       id: "rev-2",
       name: "مریم س.",
       rating: 4,
@@ -65,15 +56,6 @@ export function buildReviewsResponse(
       verified: true,
       voiceUrl: "/audio/reviews/04.mp3",
       voiceDurationSeconds: 32,
-    },
-    {
-      id: "rev-5",
-      name: "امیر ت.",
-      rating: 4,
-      date: new Date(now - 28 * DAY_MS).toISOString(),
-      verified: true,
-      voiceUrl: "/audio/reviews/05.mp3",
-      voiceDurationSeconds: 158,
     },
     {
       id: "rev-6",
