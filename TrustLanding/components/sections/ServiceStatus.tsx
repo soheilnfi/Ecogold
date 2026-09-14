@@ -63,7 +63,8 @@ export function ServiceStatus() {
             {copy.serviceStatus.unavailableMessage}
           </div>
         ) : (
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="mt-10 space-y-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {data.services.map((service, idx) => {
               const style = STATE_STYLE[service.state];
               const tier = uptimeTier(service.uptime30d);
@@ -102,12 +103,15 @@ export function ServiceStatus() {
                 </Reveal>
               );
             })}
+          </div>
 
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {copy.limitedMarkets.tabs.map((market, idx) => (
               <Reveal key={market.key} delay={(data.services.length + idx) * 0.03}>
                 <MarketStatusCard market={market} />
               </Reveal>
             ))}
+          </div>
           </div>
         )}
 

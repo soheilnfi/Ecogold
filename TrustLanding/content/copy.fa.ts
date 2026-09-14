@@ -327,7 +327,6 @@ export const copy = {
       { key: "akhavan-131", brand: "اخوان", rawWeightGrams: 131.45, purity: 900, weight750Grams: 157.74 },
       { key: "akhavan-85", brand: "اخوان", rawWeightGrams: 85.19, purity: 761, weight750Grams: 86.439 },
       { key: "akhavan-9-97", brand: "اخوان", rawWeightGrams: 9.97, purity: 751, weight750Grams: 9.983 },
-      { key: "akhavan-3-35", brand: "اخوان", rawWeightGrams: 3.35, purity: 753, weight750Grams: 3.363 },
     ],
     barItems: [
       { key: "mokagold-20g", brand: "موکاگلد", weightGrams: 20, deliveryFeePercent: 3 },

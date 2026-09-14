@@ -28,7 +28,6 @@ export interface StatusResponse {
 const DAY_MS = 24 * 60 * 60_000;
 
 const SERVICE_DEFS = [
-  { key: "trade", label: "خرید و فروش", sla: "SLA: دسترس‌پذیری ۲۴/۷" },
   { key: "depositToman", label: "واریز ریالی", sla: "SLA: حداکثر ۲۴ ساعت" },
   { key: "withdrawToman", label: "برداشت ریالی", sla: "SLA: حداکثر ۷۲ ساعت" },
 ] as const;
@@ -36,7 +35,7 @@ const SERVICE_DEFS = [
 const DEGRADED_KEYS = new Set<string>([]);
 const DOWN_KEYS = new Set<string>([]);
 
-function buildDays(now: number, key: string, forcedState: ServiceState): ServiceDay[] {
+export function buildDays(now: number, key: string, forcedState: ServiceState): ServiceDay[] {
   const rand = seededRandom(`status-${key}-v1`);
   const days: ServiceDay[] = [];
 
@@ -60,7 +59,7 @@ function buildDays(now: number, key: string, forcedState: ServiceState): Service
   return days;
 }
 
-function average(values: number[]): number {
+export function average(values: number[]): number {
   return Math.round((values.reduce((a, b) => a + b, 0) / values.length) * 100) / 100;
 }
 
